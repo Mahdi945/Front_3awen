@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Prend toute la hauteur de la fenêtre
+  
+    .video-frame {
+      position: relative;
+      width: 95%; // Ajustez la largeur selon vos besoins (plus grand que 80%)
+      height: 95%; // Ajustez la hauteur selon vos besoins (plus grand que 80%)
+      background-color: white; // Couleur de fond blanc
+      border-radius: 15px; // Coins arrondis
+      overflow: hidden; // Pour masquer tout débordement
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); // Ombre pour donner un effet de profondeur
+  
+      .logo {
+        position: absolute;
+        top: 20px; // Positionnez le logo selon vos préférences
+        left: 20px; // Positionnez le logo à gauche
+        width: 110px; // Ajustez la taille du logo selon vos besoins
+        z-index: 2; // Assurez-vous que le logo est au-dessus de la vidéo
+      }
+  
+      .links {
+        position: absolute;
+        top: 20px; // Positionnez les liens en haut
+        right: 20px; // Positionnez à droite
+        z-index: 2; // Assurez-vous que les liens sont au-dessus de la vidéo
+  
+        .link {
+          color: white; // Couleur du texte blanc
+          text-decoration: none; // Enlever le soulignement
+          margin-left: 15px; // Espace entre les liens
+          font-size: 18px; // Ajustez la taille de la police selon vos besoins
+  
+          &:hover {
+            text-decoration: underline; // Souligner lors du survol
+          }
+        }
+      }
+  
+      .video-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1; // Assurez-vous que la vidéo est en dessous des liens
+  
+        .background-video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; // Assurez-vous que la vidéo couvre tout le cadre
+        }
+      }
+    }
+  }
+  
+  
