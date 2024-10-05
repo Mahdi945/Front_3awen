@@ -1,0 +1,87 @@
+$soft-blue: #088bdd; // Couleur bleu doux
+$white: #fff;
+$gray-shadow: rgba(0, 0, 0, 0.1);
+$soft-red: #c1c8eb; // Couleur rouge doux
+$darker-blue: darken($soft-blue, 20%); // Couleur bleu plus foncé
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
+  padding: 20px 50px;
+  box-shadow: 0 4px 8px $gray-shadow;
+  transition: background-color 0.3s ease; // Transition pour l'effet de survol
+
+  .logo img {
+    max-width: 100px; // Taille du logo
+    transition: transform 0.3s ease; // Transition pour l'effet de survol
+    &:hover {
+      transform: rotate(5deg) scale(1.05); // Rotation légère au survol
+    }
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+
+    li {
+      a {
+        text-decoration: none;
+        color: $soft-blue; // Couleur bleu doux
+        font-weight: bold;
+        font-size: 18px;
+        padding: 10px; // Espacement intérieur
+        border-radius: 5px; // Coins arrondis
+        transition: transform 0.3s ease, color 0.3s ease; // Transition pour l'élévation et la couleur
+
+        &:hover {
+          color: $soft-blue; // Garder la couleur d'origine
+          transform: translateY(-3px); // Légère élévation au survol
+        }
+      }
+
+      // Appliquer l'effet de foncé aux autres liens lorsque l'un est survolé
+      &:hover a {
+        color: $soft-blue; // Garder la couleur d'origine pour le lien survolé
+      }
+
+      &:not(:hover) a {
+        color: $darker-blue; // Couleur plus foncée pour les autres liens
+      }
+    }
+
+    // Styles spécifiques pour le lien de déconnexion
+    .logout {
+      color: $soft-red; // Couleur du lien de déconnexion
+      font-weight: normal; // Réinitialiser le poids de la police
+
+      &:hover {
+        color: $white; // Couleur au survol
+        background-color: $soft-red; // Fond rouge doux au survol
+        transform: translateY(-3px); // Légère élévation au survol
+      }
+    }
+  }
+}
+
+// Responsive Styles
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+
+    .nav-links {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+  }
+}

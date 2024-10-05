@@ -1,62 +1,92 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; // Prend toute la hauteur de la fenêtre
-  
-    .video-frame {
-      position: relative;
-      width: 95%; // Ajustez la largeur selon vos besoins (plus grand que 80%)
-      height: 95%; // Ajustez la hauteur selon vos besoins (plus grand que 80%)
-      background-color: white; // Couleur de fond blanc
-      border-radius: 15px; // Coins arrondis
-      overflow: hidden; // Pour masquer tout débordement
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); // Ombre pour donner un effet de profondeur
-  
-      .logo {
-        position: absolute;
-        top: 20px; // Positionnez le logo selon vos préférences
-        left: 20px; // Positionnez le logo à gauche
-        width: 110px; // Ajustez la taille du logo selon vos besoins
-        z-index: 2; // Assurez-vous que le logo est au-dessus de la vidéo
-      }
-  
-      .links {
-        position: absolute;
-        top: 20px; // Positionnez les liens en haut
-        right: 20px; // Positionnez à droite
-        z-index: 2; // Assurez-vous que les liens sont au-dessus de la vidéo
-  
-        .link {
-          color: white; // Couleur du texte blanc
-          text-decoration: none; // Enlever le soulignement
-          margin-left: 15px; // Espace entre les liens
-          font-size: 18px; // Ajustez la taille de la police selon vos besoins
-  
-          &:hover {
-            text-decoration: underline; // Souligner lors du survol
-          }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .video-frame {
+    position: relative;
+    width: 95%;
+    height: 95%;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 110px;
+      z-index: 2;
+    }
+
+    .links {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+
+      .link {
+        color: white;
+        text-decoration: none;
+        margin-left: 15px;
+        font-size: 18px;
+
+        &:hover {
+          text-decoration: underline;
         }
       }
-  
-      .video-container {
+    }
+
+    .video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+
+      .background-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      // Style pour le texte d'accueil
+      .welcome-text {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1; // Assurez-vous que la vidéo est en dessous des liens
-  
-        .background-video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover; // Assurez-vous que la vidéo couvre tout le cadre
+        color: white; // Couleur du texte
+        font-size: 36px; // Taille du texte
+        text-align: center; // Centre le texte
+        z-index: 3; // Assurez-vous que le texte est au-dessus de la vidéo
+        animation: fadeIn 2s; // Animation d'apparition
+
+        // Ombre portée pour le texte
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        
+        // Ajout d'une marge pour le texte
+        padding: 20px;
+
+        // Styles de media query pour les petits écrans
+        @media (max-width: 768px) {
+          font-size: 28px; // Ajustez la taille du texte sur les petits écrans
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0; // Début de l'animation
+            transform: translateY(20px); // Déplace le texte vers le bas
+          }
+          to {
+            opacity: 1; // Fin de l'animation
+            transform: translateY(0); // Remet le texte à sa position d'origine
+          }
         }
       }
     }
   }
-  
-  
+}

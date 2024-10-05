@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="auth-container">
+    <div class="auth-card">
+      <h2 class="auth-title">Créer un compte</h2>
+      <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm" class="horizontal-form">
+        <div class="input-group">
+          <div class="form-field">
+            <input type="text" name="firstName" ngModel placeholder="Prénom" required />
+          </div>
+          <div class="form-field">
+            <input type="text" name="lastName" ngModel placeholder="Nom" required />
+          </div>
+        </div>
+        <div class="input-group">
+          <div class="form-field">
+            <input type="email" name="email" ngModel placeholder="Email" required />
+          </div>
+          <div class="form-field">
+            <input type="password" name="password" ngModel placeholder="Mot de passe" required />
+          </div>
+        </div>
+        <div class="input-group">
+          <div class="form-field">
+            <input type="tel" name="phone" ngModel placeholder="Numéro de téléphone" required />
+          </div>
+          
+          <div class="form-field city-select">
+      
+            <select name="city" ngModel required>
+              <option value="" disabled selected>Sélectionner une ville</option>
+              <option value="Ariana">Ariana</option>
+              <option value="Béja">Béja</option>
+              <option value="Ben Arous">Ben Arous</option>
+              <option value="Bizerte">Bizerte</option>
+              <option value="Gabès">Gabès</option>
+              <option value="Gafsa">Gafsa</option>
+              <option value="Jendouba">Jendouba</option>
+              <option value="Kairouan">Kairouan</option>
+              <option value="Kasserine">Kasserine</option>
+              <option value="Kébili">Kébili</option>
+              <option value="Le Kef">Le Kef</option>
+              <option value="Mahdia">Mahdia</option>
+              <option value="La Manouba">La Manouba</option>
+              <option value="Médenine">Médenine</option>
+              <option value="Monastir">Monastir</option>
+              <option value="Nabeul">Nabeul</option>
+              <option value="Sfax">Sfax</option>
+              <option value="Sidi Bouzid">Sidi Bouzid</option>
+              <option value="Siliana">Siliana</option>
+              <option value="Sousse">Sousse</option>
+              <option value="Tataouine">Tataouine</option>
+              <option value="Tozeur">Tozeur</option>
+              <option value="Tunis">Tunis</option>
+              <option value="Zaghouan">Zaghouan</option>
+            </select>
+          </div>
+        </div>
+      
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" name="terms" ngModel required /> J'accepte les conditions d'utilisation
+          </label>
+        </div>
+        <button type="submit" class="auth-button">S'inscrire</button>
+      </form>
+    </div>
+  </div>
+  

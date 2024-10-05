@@ -1,29 +1,67 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: transparent; // Changement ici
-  
-    .navbar-left {
-      .logo {
-        height: 50px;
-      }
-    }
-  
-    .navbar-right {
-      .btn {
-        margin-left: 20px;
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        padding: 10px 20px;
-        background-color: #007bff;
-        border-radius: 5px;
-  
-        &:hover {
-          background-color: #0056b3;
-        }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(45deg, #1e90ff, #32cd32); // Dégradé de bleu et vert clair
+  padding: 15px 30px; // Espacement intérieur
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); // Ombre portée
+  position: relative;
+  z-index: 1000; // S'assurer que la navbar est au-dessus du contenu
+  border-radius: 10px; // Coins arrondis
+  transition: all 0.3s ease; // Transition douce pour tous les changements
+
+  &:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); // Ombre plus prononcée au survol
+  }
+
+  .navbar-left {
+    .logo {
+      width: 90px; // Ajuster la taille du logo
+      height: auto;
+      transition: transform 0.3s, filter 0.3s; // Animation de transformation et de filtre
+
+      &:hover {
+        transform: scale(1.1); // Agrandir légèrement au survol
+        filter: brightness(1.2); // Augmenter la luminosité au survol
       }
     }
   }
+
+  .navbar-right {
+    display: flex;
+    gap: 20px; // Espacement entre les liens
+
+    .link {
+      color: white; // Couleur du texte
+      text-decoration: none; // Supprimer le soulignement
+      font-size: 18px; // Taille de la police
+      position: relative; // Position relative pour l'effet de soulignement
+      padding: 10px 15px; // Espacement intérieur
+      border-radius: 5px; // Coins arrondis
+      transition: background 0.3s, color 0.3s, transform 0.3s; // Animation de fond, de couleur et de transformation
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2); // Fond semi-transparent au survol
+        color: #088bdd; // Couleur du texte au survol
+        transform: translateY(-2px); // Légère élévation au survol
+      }
+
+      &::after {
+        content: ''; // Ajouter un pseudo-élément
+        display: block;
+        width: 100%; // Largeur égale au lien
+        height: 2px; // Épaisseur de la ligne
+        background: white; // Couleur de la ligne
+        position: absolute; // Positionner le pseudo-élément
+        bottom: -5px; // Position en bas du texte
+        left: 0; // Aligner à gauche
+        transform: scaleX(0); // Échelle initiale à 0
+        transition: transform 0.3s ease; // Animation de la transformation
+      }
+
+      &:hover::after {
+        transform: scaleX(1); // Agrandir l'échelle au survol
+      }
+    }
+  }
+}

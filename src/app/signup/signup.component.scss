@@ -1,0 +1,103 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Occuper toute la hauteur de la vue
+  
+    .auth-card {
+      background-color: rgba(255, 255, 255, 0.95); // Fond légèrement transparent
+      border-radius: 15px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3); // Augmentation de l'ombre portée
+      padding: 40px; // Augmentation du padding
+      width: 700px; // Augmentation de la largeur
+      max-width: 90%; // Largeur maximale pour les écrans plus petits
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+  
+      &:hover {
+        transform: translateY(-5px); // Légère élévation au survol
+        box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4); // Augmentation de l'ombre au survol
+      }
+  
+      .auth-title {
+        margin-bottom: 30px; // Espace en bas du titre
+        color: #333;
+        font-size: 30px; // Augmentation de la taille de la police
+        font-weight: bold;
+      }
+  
+      .input-group {
+        display: flex; // Utilisez flexbox pour la disposition horizontale
+        justify-content: space-between; // Espace entre les champs
+        margin-bottom: 25px; // Augmentation de l'espace entre les groupes
+  
+        .form-field {
+          flex: 1; // Permet à chaque champ de s'étendre également
+          margin-right: 15px; // Espace entre les champs
+          
+  
+          &:last-child {
+            margin-right: 0; // Supprime l'espace à droite du dernier champ
+          }
+        }
+  
+        input,
+        select {
+          width: 100%;
+          padding: 14px; // Augmentation du padding
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          font-size: 16px;
+          transition: border-color 0.3s;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Ajout d'une légère ombre aux champs
+  
+          &:focus {
+            border-color: #007bff; // Couleur de bordure au focus
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); // Ombre au focus
+          }
+        }
+      }
+  
+      .city-select {
+        display: flex; // Pour aligner l'icône et le sélecteur
+        align-items: center;
+        
+  
+        i {
+          margin-right: 3px; // Espace entre l'icône et le sélecteur
+        }
+      }
+  
+      .checkbox-group {
+        text-align: left;
+        margin-bottom: 25px; // Augmentation de l'espace en bas
+  
+        label {
+          font-size: 14px;
+          color: #666;
+  
+          input {
+            margin-right: 10px;
+          }
+        }
+      }
+  
+      .auth-button {
+        background-color: #007bff; // Couleur du bouton
+        color: #fff;
+        border: none;
+        padding: 14px 30px; // Augmentation du padding
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s, transform 0.3s;
+  
+        &:hover {
+          background-color: #0056b3; // Couleur du bouton au survol
+          transform: scale(1.05); // Agrandissement au survol
+        }
+      }
+    }
+  }
+  
