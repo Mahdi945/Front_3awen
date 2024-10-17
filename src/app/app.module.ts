@@ -18,6 +18,8 @@ import { PartnershipComponent } from './partnership/partnership.component';
 import { ContactComponent } from './contact/contact.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FooterComponent } from './footer/footer.component'; // Ajoutez ceci
+import { HttpClientModule } from '@angular/common/http';
+import { EmailVerificationComponent } from './email-verification/email-verification.component'; // Importer HttpClientModule
 
 @NgModule({
   declarations: [
@@ -35,13 +37,15 @@ import { FooterComponent } from './footer/footer.component'; // Ajoutez ceci
     PartnershipComponent,
     ContactComponent,
     LogoutComponent,
-    FooterComponent
+    FooterComponent,
+    EmailVerificationComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,63 +1,79 @@
 .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; // Occuper toute la hauteur de la vue
-  
-    .auth-card {
-      background-color: rgba(255, 255, 255, 0.95); // Fond légèrement transparent
-      border-radius: 15px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      padding: 30px;
-      width: 450px; // Largeur de la carte
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-  
-      &:hover {
-        transform: translateY(-5px); // Légère élévation au survol
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-      }
-  
-      .auth-title {
-        margin-bottom: 25px;
-        color: #333;
-        font-size: 28px;
-        font-weight: bold;
-      }
-  
-      .input-group {
-        margin-bottom: 20px;
-  
-        input {
-          width: 100%;
-          padding: 12px;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-          font-size: 16px;
-          transition: border-color 0.3s;
-  
-          &:focus {
-            border-color: #007bff; // Couleur de bordure au focus
-            outline: none;
-          }
-        }
-      }
-  
-      .auth-button {
-        background-color: #007bff; // Couleur du bouton
-        color: #fff;
-        border: none;
-        padding: 12px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Occuper toute la hauteur de la vue
+
+  .auth-card {
+    background-color: rgba(255, 255, 255, 0.95); // Fond légèrement transparent
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    width: 450px; // Largeur de la carte
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      transform: translateY(-5px); // Légère élévation au survol
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .auth-title {
+      margin-bottom: 25px;
+      color: #333;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
         border-radius: 10px;
-        cursor: pointer;
-        font-size: 18px;
-        transition: background-color 0.3s, transform 0.3s;
-  
-        &:hover {
-          background-color: #0056b3; // Couleur du bouton au survol
-          transform: scale(1.05); // Agrandissement au survol
+        font-size: 16px;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: #007bff; // Couleur de bordure au focus
+          outline: none;
         }
       }
     }
+
+    .auth-button {
+      background-color: #007bff; // Couleur du bouton
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s, transform 0.3s;
+
+      &:hover {
+        background-color: #0056b3; // Couleur du bouton au survol
+        transform: scale(1.05); // Agrandissement au survol
+      }
+    }
   }
-  
+
+  .error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #f1b0b7;
+      border-color: #f1b0b7;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<div class="email-verification">
+  <h2>{{ verificationMessage }}</h2>
+
+  <div *ngIf="isSuccess" class="check-icon">
+    &#10004; <!-- Unicode character for check mark -->
+  </div>
+  <button *ngIf="isSuccess" (click)="navigateToLogin()" class="auth-button">
+    Aller à la connexion
+  </button>
+</div>
