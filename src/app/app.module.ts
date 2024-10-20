@@ -19,7 +19,9 @@ import { ContactComponent } from './contact/contact.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FooterComponent } from './footer/footer.component'; // Ajoutez ceci
 import { HttpClientModule } from '@angular/common/http';
-import { EmailVerificationComponent } from './email-verification/email-verification.component'; // Importer HttpClientModule
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { AdminComponent } from './admin/admin.component';
+import { LogAdminComponent } from './log-admin/log-admin.component'; // Importer HttpClientModule
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
     ContactComponent,
     LogoutComponent,
     FooterComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    AdminComponent,
+    LogAdminComponent
 
   ],
   imports: [

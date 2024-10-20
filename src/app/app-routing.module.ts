@@ -5,11 +5,13 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { AccueilComponent } from './accueil/accueil.component';
-import { CreateEventComponent } from './create-event/create-event.component'; // Importer le composant CreateEvent
-import { ParticipateEventComponent } from './participate-event/participate-event.component'; // Importer le composant ParticipateEvent
-import { PartnershipComponent } from './partnership/partnership.component'; // Importer le composant Partnership
-import { ContactComponent } from './contact/contact.component'; // Importer le composant Contact
-import { LogoutComponent } from './logout/logout.component'; // Importer le composant Logout
+import { CreateEventComponent } from './create-event/create-event.component';
+import { ParticipateEventComponent } from './participate-event/participate-event.component';
+import { PartnershipComponent } from './partnership/partnership.component';
+import { ContactComponent } from './contact/contact.component';
+import { LogoutComponent } from './logout/logout.component';
+import { LogAdminComponent } from './log-admin/log-admin.component'; // Importer le composant LogAdmin
+import { AdminComponent } from './admin/admin.component'; // Importer le composant Admin
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,14 +19,15 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
   { path: 'accueil', component: AccueilComponent },
-  { path: 'create-event', component: CreateEventComponent }, // Ajouter la route pour CreateEvent
-  { path: 'participate-event', component: ParticipateEventComponent }, // Ajouter la route pour ParticipateEvent
-  { path: 'partnership', component: PartnershipComponent }, // Ajouter la route pour Partnership
-  { path: 'contact', component: ContactComponent }, // Ajouter la route pour Contact
-  { path: 'logout', component: LogoutComponent }, // Ajouter la route pour Logout
+  { path: 'create-event', component: CreateEventComponent },
+  { path: 'participate-event', component: ParticipateEventComponent },
+  { path: 'partnership', component: PartnershipComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'log-admin', component: LogAdminComponent }, // Ajouter la route pour LogAdmin
+  { path: 'admin', component: AdminComponent }, // Ajouter la route pour Admin
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirection vers la page de login
   //{ path: '**', redirectTo: '/home' }  Redirection pour les routes non trouvées
-  
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirection vers la page d'accueil
 ];
 
 @NgModule({

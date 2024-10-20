@@ -1,44 +1,70 @@
 <app-navbarr></app-navbarr>
 
 <div class="create-event-container">
-    <div class="breadcrumb">
-        <a routerLink="/accueil">Home</a> / <span>Créer un événement</span>
+  <div class="breadcrumb">
+    <a routerLink="/accueil">Accueil</a> / <span>Créer un événement</span>
+  </div>
+
+  <h1 class="blue-title">Demande de Création d'un Événement </h1>
+
+  <form class="event-form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="organizer-name">Nom complet de l'organisateur :</label>
+      <input type="text" id="organizer-name" [(ngModel)]="evenement.nomOrganisateur" name="nomOrganisateur" required />
     </div>
 
-    <h1 class="blue-title">Demande de Création d'un Événement </h1>
+    <div class="form-group">
+      <label for="organizer-email">Adresse Email de l'organisateur :</label>
+      <input type="email" id="organizer-email" [(ngModel)]="evenement.emailOrganisateur" name="emailOrganisateur" required />
+    </div>
 
-    <form class="event-form">
-        <div class="form-group">
-            <label for="event-name">Nom de l'Événement :</label>
-            <input type="text" id="event-name" required />
-        </div>
+    <div class="form-group">
+      <label for="event-title">Titre de l'Événement :</label>
+      <input type="text" id="event-title" [(ngModel)]="evenement.titre" name="titre" required />
+    </div>
 
-        <div class="form-group">
-            <label for="event-date">Date de l'Événement :</label>
-            <input type="date" id="event-date" required />
-        </div>
+    <div class="form-group">
+      <label for="event-date">Date de l'Événement :</label>
+      <input type="date" id="event-date" [(ngModel)]="evenement.date" name="date" required />
+    </div>
 
-        <div class="form-group">
-            <label for="event-time">Heure de l'Événement :</label>
-            <input type="time" id="event-time" required />
-        </div>
+    <div class="form-group">
+      <label for="event-time">Heure de l'Événement :</label>
+      <input type="time" id="event-time" [(ngModel)]="evenement.heure" name="heure" required />
+    </div>
 
-        <div class="form-group">
-            <label for="event-location">Lieu de l'Événement :</label>
-            <input type="text" id="event-location" required />
-        </div>
+    <div class="form-group">
+      <label for="event-location">Lieu de l'Événement :</label>
+      <input type="text" id="event-location" [(ngModel)]="evenement.lieu" name="lieu" required />
+    </div>
 
-        <div class="form-group">
-            <label for="event-description">Description de l'Événement :</label>
-            <textarea id="event-description" rows="4" required></textarea>
-        </div>
+    <div class="form-group">
+      <label for="event-description">Description de l'Événement :</label>
+      <textarea id="event-description" [(ngModel)]="evenement.description" name="description" rows="4" required></textarea>
+    </div>
 
-        <div class="form-group">
-            <label for="event-volunteers">Nombre de Volontaires Requis :</label>
-            <input type="number" id="event-volunteers" min="1" required />
-        </div>
+    <div class="form-group">
+      <label for="event-volunteers">Nombre de Volontaires Requis :</label>
+      <input type="number" id="event-volunteers" [(ngModel)]="evenement.volontaires" name="volontaires" min="1" required />
+    </div>
 
-        <button type="submit" class="submit-button">Envoyer la demande</button>
-    </form>
+    <div class="form-group">
+      <label for="event-proof">Preuves pour vous donner plus de crédibilités :</label>
+      <div class="file-selection-container">
+        <input type="file" id="event-proof" (change)="onFileSelected($event)" multiple />
+        <button type="button" class="clear-button" (click)="clearFileSelection()">&times;</button>
+      </div>
+      <ul>
+        <li *ngFor="let fileName of selectedFileNames">{{ fileName }}</li>
+      </ul>
+    </div>
+
+    <button type="submit" class="submit-button">Envoyer la demande</button>
+  </form>
+
+  <div *ngIf="showSuccessMessage" class="success-message">
+    <span class="checkmark">✔</span> Votre demande a été envoyée, vous serez contacté par les admins bientôt.
+  </div>
 </div>
+
 <app-footer></app-footer>
