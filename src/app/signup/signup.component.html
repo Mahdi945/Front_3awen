@@ -30,34 +30,38 @@
           <input type="tel" name="phone" ngModel placeholder="Numéro de téléphone" required pattern="[0-9]*" minlength="8" maxlength="15" />
         </div>
         <div class="form-field city-select">
-          <select name="city" ngModel required>
-            <option value="" disabled selected>Sélectionner une ville</option>
-            <option value="Ariana">Ariana</option>
-            <option value="Béja">Béja</option>
-            <option value="Ben Arous">Ben Arous</option>
-            <option value="Bizerte">Bizerte</option>
-            <option value="Gabès">Gabès</option>
-            <option value="Gafsa">Gafsa</option>
-            <option value="Jendouba">Jendouba</option>
-            <option value="Kairouan">Kairouan</option>
-            <option value="Kasserine">Kasserine</option>
-            <option value="Kébili">Kébili</option>
-            <option value="Le Kef">Le Kef</option>
-            <option value="Mahdia">Mahdia</option>
-            <option value="La Manouba">La Manouba</option>
-            <option value="Médenine">Médenine</option>
-            <option value="Monastir">Monastir</option>
-            <option value="Nabeul">Nabeul</option>
-            <option value="Sfax">Sfax</option>
-            <option value="Sidi Bouzid">Sidi Bouzid</option>
-            <option value="Siliana">Siliana</option>
-            <option value="Sousse">Sousse</option>
-            <option value="Tataouine">Tataouine</option>
-            <option value="Tozeur">Tozeur</option>
-            <option value="Tunis">Tunis</option>
-            <option value="Zaghouan">Zaghouan</option>
-          </select>
-        </div>
+         
+           
+              <select name="city" ngModel required>
+                <option value="" disabled selected>Sélectionner une ville</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Béja">Béja</option>
+                <option value="Ben Arous">Ben Arous</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Gabès">Gabès</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kasserine">Kasserine</option>
+                <option value="Kébili">Kébili</option>
+                <option value="Le Kef">Le Kef</option>
+                <option value="Mahdia">Mahdia</option>
+                <option value="La Manouba">La Manouba</option>
+                <option value="Médenine">Médenine</option>
+                <option value="Monastir">Monastir</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Sfax">Sfax</option>
+                <option value="Sidi Bouzid">Sidi Bouzid</option>
+                <option value="Siliana">Siliana</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Tataouine">Tataouine</option>
+                <option value="Tozeur">Tozeur</option>
+                <option value="Tunis">Tunis</option>
+                <option value="Zaghouan">Zaghouan</option>
+              </select>
+            </div>
+      
+          
       </div>
       <div class="checkbox-group">
         <label>
@@ -66,5 +70,15 @@
       </div>
       <button type="submit" class="auth-button" [disabled]="registerForm.invalid">S'inscrire</button>
     </form>
+
+    <!-- Google Sign-In Button -->
+    <div class="google-signin-container">
+      <div id="g_id_onload"
+          data-client_id="227936580507-vmrfhtno62vkofudvqsmit1916u1ng4n.apps.googleusercontent.com"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin" data-type="standard"></div>
+    </div>
   </div>
 </div>

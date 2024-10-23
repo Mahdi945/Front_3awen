@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { SocialAuthService, GoogleLoginProvider, SocialUser } from '@abacritt/angularx-social-login'; // Import des services sociaux
 
 @Component({
   selector: 'app-signup',
@@ -8,12 +9,25 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-  private apiUrl = 'http://localhost:3000/api/users/register'; // L'URL de l'API
-  successMessage: string = ''; // Variable pour stocker le message de succès
-  errorMessage: string = ''; // Variable pour stocker le message d'erreur
+  private apiUrl = 'http://localhost:3000/api/users/register'; // URL de l'API pour l'inscription classique
+  successMessage: string = ''; // Variable pour le message de succès
+  errorMessage: string = ''; // Variable pour le message d'erreur
 
-  constructor(private http: HttpClient) {}
+  user: SocialUser | null = null; // Stocker les informations de l'utilisateur social
+  loggedIn: boolean = false; // Vérifier si l'utilisateur est connecté via OAuth
 
+  constructor(
+    private http: HttpClient,
+    private authService: SocialAuthService // Service pour l'authentification sociale
+  ) {
+    // Récupérer l'état de connexion sociale
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+  }
+
+  // Méthode pour l'inscription classique via formulaire
   onRegister(form: NgForm) {
     if (form.valid) {
       const userData = {
@@ -25,10 +39,9 @@ export class SignupComponent {
         city: form.value.city
       };
 
-      // Envoyer les données au serveur
+      // Envoyer les données d'inscription au serveur
       this.http.post(this.apiUrl, userData).subscribe({
         next: (response) => {
-          // Afficher un message de confirmation
           this.successMessage = 'Inscription réussie ! Veuillez vérifier votre email pour activer votre compte.';
           this.errorMessage = ''; // Réinitialiser le message d'erreur
         },
@@ -44,5 +57,41 @@ export class SignupComponent {
     } else {
       console.log('Formulaire invalide');
     }
+  }
+
+  // Méthode pour l'inscription via Google
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
+      // Inscrire l'utilisateur avec les données obtenues via Google
+      const googleUserData = {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        password: null, // Aucun mot de passe puisque l'authentification est via Google
+        phone: null, // Optionnel
+        city: null // Optionnel
+      };
+
+      // Envoyer les données de l'utilisateur au serveur pour l'inscription via Google
+      this.http.post(this.apiUrl, googleUserData).subscribe({
+        next: (response) => {
+          this.successMessage = 'Inscription via Google réussie ! Veuillez vérifier votre email pour activer votre compte.';
+          this.errorMessage = '';
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'inscription avec Google', error);
+          this.errorMessage = 'Une erreur est survenue avec Google. Veuillez réessayer plus tard.';
+        }
+      });
+    }).catch((error) => {
+      console.error('Erreur lors de la connexion avec Google', error);
+    });
+  }
+
+  // Méthode pour déconnecter l'utilisateur
+  signOut(): void {
+    this.authService.signOut();
+    this.loggedIn = false;
+    this.user = null;
   }
 }

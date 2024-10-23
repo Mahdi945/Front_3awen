@@ -40,6 +40,10 @@ export class LoginComponent {
               this.errorMessage = 'Adresse e-mail ou mot de passe incorrect.';
             } else if (error.status === 401) {
               this.errorMessage = 'Requête incorrecte. Veuillez vérifier vos informations.';
+            } else if (error.status === 403) {
+              this.errorMessage = 'Veuillez vérifier votre email avant de vous connecter.';
+            } else if (error.status === 404) {
+              this.errorMessage = 'Utilisateur non trouvé. Veuillez vérifier vos informations.';
             } else {
               this.errorMessage = 'Une erreur est survenue. Veuillez réessayer plus tard.';
             }

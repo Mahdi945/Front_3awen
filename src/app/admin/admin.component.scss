@@ -1,0 +1,94 @@
+// Global table styling
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+
+  thead {
+    background-color: #007BFF; // Primary blue color
+    color: white;
+
+    th {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 14px;
+    }
+  }
+
+  tbody {
+    tr {
+      &:nth-child(even) {
+        background-color: #f1f1f1;
+      }
+
+      &:hover {
+        background-color: #e0f7fa; // Light hover effect
+      }
+
+      td {
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  }
+}
+
+// Button styling
+button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-right: 10px; // Add space between buttons
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &.approve-btn, &.reject-btn {
+    background-color: #007bff; // Blue for both approve and reject
+    color: white;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  &.download-btn {
+    background-color: #007bff; // Blue for download
+    color: white;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  &:disabled {
+    background-color: #6c757d; // Gray for disabled state
+    cursor: not-allowed;
+  }
+}
+
+// Responsive styling
+@media (max-width: 768px) {
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}

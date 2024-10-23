@@ -1,1 +1,37 @@
-<p>admin works!</p>
+<!-- admin.component.html -->
+
+<div class="admin-container">
+    <h2>Gestion des Événements</h2> <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom de l'Organisateur</th>
+          <th>Email de l'Organisateur</th>
+          <th>Titre</th>
+          <th>Date</th>
+          <th>Heure</th>
+          <th>Lieu</th>
+          <th>Description</th>
+          <th>Volontaires</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td>{{ event.nomOrganisateur }}</td>
+          <td>{{ event.emailOrganisateur }}</td>
+          <td>{{ event.titre }}</td>
+          <td>{{ event.date }}</td>
+          <td>{{ event.heure }}</td>
+          <td>{{ event.lieu }}</td>
+          <td>{{ event.description }}</td>
+          <td>{{ event.volontaires }}</td>
+          <td>
+            <button  class="approve-btn" (click)="approveEvent(event._id)" [disabled]="event.isApproved">Approuver</button>
+            <button  class="reject-btn"  (click)="rejectEvent(event._id)">Refuser</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

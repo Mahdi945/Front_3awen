@@ -3,7 +3,6 @@
   <div class="auth-card">
     <h2 class="auth-title">Se connecter</h2>
 
-    
     <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
       <div class="input-group">
         <input type="email" name="email" ngModel placeholder="Email" required />
@@ -13,7 +12,12 @@
       </div>
       <button type="submit" class="auth-button">Connexion</button>
     </form> <br>
-        
+    
+    <!-- Lien mot de passe oublié -->
+    <div class="forgot-password">
+      <a routerLink="/forget-pass">Mot de passe oublié ?</a>
+    </div>
+    
     <!-- Message d'erreur -->
     <div *ngIf="errorMessage" class="error-message">
       {{ errorMessage }}

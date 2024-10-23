@@ -12,6 +12,8 @@ import { ContactComponent } from './contact/contact.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LogAdminComponent } from './log-admin/log-admin.component'; // Importer le composant LogAdmin
 import { AdminComponent } from './admin/admin.component'; // Importer le composant Admin
+import { ForgetPassComponent } from './forget-pass/forget-pass.component'; // Importer le composant ForgetPass
+import { NewPassComponent } from './new-pass/new-pass.component'; // Importer le composant NewPass
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'log-admin', component: LogAdminComponent }, // Ajouter la route pour LogAdmin
   { path: 'admin', component: AdminComponent }, // Ajouter la route pour Admin
+  { path: 'forget-pass', component: ForgetPassComponent }, // Ajouter la route pour ForgetPass
+  { path: 'new-pass', component: NewPassComponent }, // Ajouter la route pour NewPass
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirection vers la page de login
   //{ path: '**', redirectTo: '/home' }  Redirection pour les routes non trouvées
 ];
