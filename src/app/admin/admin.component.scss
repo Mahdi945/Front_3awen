@@ -47,7 +47,6 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-right: 10px; // Add space between buttons
 
   &:hover {
     transform: scale(1.05);
@@ -56,6 +55,9 @@ button {
   &.approve-btn, &.reject-btn {
     background-color: #007bff; // Blue for both approve and reject
     color: white;
+    width: 100px; // Ensure same width
+    height: 60px;
+    margin-right: 10px; // Add space between buttons
 
     &:hover {
       background-color: #0056b3;
@@ -65,6 +67,7 @@ button {
   &.download-btn {
     background-color: #007bff; // Blue for download
     color: white;
+    margin-right: 0; // Remove right margin for the last button in the row
 
     &:hover {
       background-color: #0056b3;
@@ -74,6 +77,19 @@ button {
   &:disabled {
     background-color: #6c757d; // Gray for disabled state
     cursor: not-allowed;
+  }
+}
+
+// Flexbox container for action buttons
+.actions {
+  display: flex; // Ensure buttons are displayed horizontally
+
+  button {
+    margin-right: 10px; // Add space between buttons
+  }
+
+  button:last-child {
+    margin-right: 0; // Remove right margin for the last button
   }
 }
 
@@ -91,4 +107,5 @@ button {
     font-size: 12px;
     padding: 6px 10px;
   }
+  
 }

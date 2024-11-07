@@ -61,4 +61,17 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+
+  downloadProofs(eventId: string) {
+    const url = `http://localhost:3000/api/events/${eventId}/downloadProofs`;
+    this.http.get(url, { responseType: 'blob' }).subscribe(
+      (blob) => {
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `preuves_${eventId}.zip`; // Nom du fichier ZIP
+        link.click();
+      },
+      (error) => console.error('Erreur lors du téléchargement des preuves:', error)
+    );
+  }
 }
