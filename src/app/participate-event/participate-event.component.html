@@ -1,1 +1,37 @@
-<p>participate-event works!</p>
+<!-- participate-event.component.html -->
+<app-navbarr></app-navbarr>
+
+<div class="create-event-container">
+  <div class="breadcrumb">
+    <a routerLink="/accueil">Accueil</a> / <span>Participer à un événement</span>
+  </div>
+  <div class="participate-event-container">
+    <h2>Participer aux Événements</h2>
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher par titre ou lieu" [(ngModel)]="searchQuery" (input)="searchEvents()">
+      <button class="search-btn" (click)="searchEvents()">OK</button>
+    </div>
+    <div class="event-cards">
+      <div class="event-card" *ngFor="let event of filteredEvents">
+        <h3>{{ event.nomOrganisateur }}</h3>
+        <p><strong>Titre:</strong> {{ event.titre }}</p>
+        <p><strong>Date:</strong> {{ event.date }}</p>
+        <p><strong>Heure:</strong> {{ event.heure }}</p>
+        <p><strong>Lieu:</strong> {{ event.lieu }}</p>
+        <p><strong>Participants requis:</strong> {{ event.volontaires }}</p>
+        <button class="participate-btn" [disabled]="event.volontaires === 0" (click)="participate(event)">Participer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" [class.show]="showModal">
+  <div class="modal-content">
+    <div class="checkmark-circle">
+      <div class="background"></div>
+      <div class="checkmark"></div>
+    </div>
+    <p>Merci pour votre noble initiative, l'organisateur va bientôt vous appeler pour la confirmation.</p>
+  </div>
+</div>

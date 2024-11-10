@@ -22,10 +22,29 @@
 }
 
 .blue-title {
-  color: #007bff;
-  text-align: center;
-  margin-bottom: 20px;
-}
+ 
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    position: relative; // Corrected to position the underline correctly
+
+    &::after {
+      content: '';
+      width: 50px;
+      height: 4px;
+      background-color: #007bff;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
 
 .event-form {
   max-width: 600px;

@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'forget-pass', component: ForgetPassComponent }, // Ajouter la route pour ForgetPass
   { path: 'new-pass', component: NewPassComponent }, // Ajouter la route pour NewPass
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirection vers la page de login
-  //{ path: '**', redirectTo: '/home' }  Redirection pour les routes non trouvées
+  { path: '**', redirectTo: '/login' }  
 ];
 
 @NgModule({
