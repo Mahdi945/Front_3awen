@@ -10,8 +10,20 @@
     <li><a routerLink="/participate-event">Participer à un évènement</a></li>
     <li><a routerLink="/partnership">Partenariat</a></li>
     <li><a routerLink="/contact">Contact</a></li>
-    <li><a routerLink="/logout" class="logout">
+    <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login">Connexion</a></li>
+    <li *ngIf="!authService.isLoggedIn()"><a routerLink="/signup">Inscription</a></li>
+    <li *ngIf="authService.isLoggedIn()"><a routerLink="/logout" class="logout">
        Déconnexion <i class="fas fa-sign-out-alt"></i>
     </a></li>
   </ul>
+  <div class="user-profile" *ngIf="authService.isLoggedIn()">
+    <i class="fas fa-user-circle user-icon" (click)="toggleDropdown()"></i>
+    <div class="dropdown" *ngIf="dropdownOpen">
+      <p>Email: {{ authService.getUserEmail() }}</p>
+      <p>Nom: {{ authService.getUserFirstName() }} {{ authService.getUserLastName() }}</p>
+      <p>Téléphone: {{ authService.getUserPhone() }}</p>
+      <p>Ville: {{ authService.getUserCity() }}</p>
+      <!-- Add more user information here if needed -->
+    </div>
+  </div>
 </nav>

@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   }
 
   loadEvents() {
-    this.http.get<Event[]>('http://localhost:3000/api/events').subscribe({
+    this.http.get<Event[]>('http://localhost:3000/api/events/all').subscribe({
       next: (data) => {
         this.events = data;
       },

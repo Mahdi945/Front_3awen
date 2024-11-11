@@ -1,17 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service'; // Import the AuthService
+import { AuthGuard } from '../auth.guard'; // Import the AuthGuard
 
 @Component({
   selector: 'app-log-admin',
   templateUrl: './log-admin.component.html',
   styleUrls: ['./log-admin.component.scss']
 })
-export class LogAdminComponent {
+export class LogAdminComponent implements OnInit {
   errorMessage: string = ''; // Variable pour stocker le message d'erreur
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService,
+    private authGuard: AuthGuard // Inject the AuthGuard
+  ) {}
+
+  ngOnInit(): void {
+    // Set the flag to true when this component is accessed
+    this.authGuard.setAccessedLogAdmin(true);
+  }
 
   onLogin(form: NgForm) {
     if (form.valid) {
@@ -31,8 +43,8 @@ export class LogAdminComponent {
         .subscribe(
           response => {
             console.log('Connexion réussie', response);
-            // Store the JWT token in localStorage (or sessionStorage)
-            localStorage.setItem('token', response.token);
+            // Store the JWT token and user info in localStorage (or sessionStorage)
+            this.authService.login(response.token, response.user);
             this.router.navigate(['/admin']); // Redirection après connexion réussie
           },
           error => {

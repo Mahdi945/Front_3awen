@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service'; // Import the AuthService
 
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss']
 })
-export class CreateEventComponent {
+export class CreateEventComponent implements OnInit {
   evenement = {
     nomOrganisateur: '',
     emailOrganisateur: '',
@@ -17,14 +18,33 @@ export class CreateEventComponent {
     lieu: '',
     description: '',
     volontaires: 0,
-    preuves: [] as File[]
+    preuves: [] as File[],
+    id_user_organisateur: '' // Add userId to the event data
   };
 
   selectedFileNames: string[] = [];
   isModalOpen: boolean = false;
   showSuccessMessage: boolean = false;
+  exactCoordinatesEntered: boolean = false;
+  latitude: number = 51.678418;
+  longitude: number = 7.809007;
+  zoom: number = 8;
+  markerOptions: google.maps.MarkerOptions = { draggable: true };
+  markerPosition: google.maps.LatLngLiteral = { lat: this.latitude, lng: this.longitude };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // Get the user ID from the AuthService
+    const userId = this.authService.getUserId();
+    if (userId) {
+      this.evenement.id_user_organisateur = userId;
+    } else {
+      // Handle the case where userId is null (e.g., redirect to login)
+      console.error('User ID is null. Redirecting to login.');
+      this.router.navigate(['/login']);
+    }
+  }
 
   openModal() {
     this.isModalOpen = true;
@@ -63,6 +83,7 @@ export class CreateEventComponent {
     formData.append('lieu', this.evenement.lieu);
     formData.append('description', this.evenement.description);
     formData.append('volontaires', this.evenement.volontaires.toString());
+    formData.append('id_user_organisateur', this.evenement.id_user_organisateur); // Append userId to the form data
 
     // Append the uploaded proof files
     for (let i = 0; i < this.evenement.preuves.length; i++) {
@@ -82,5 +103,21 @@ export class CreateEventComponent {
         console.error('Erreur lors de la création de l\'événement:', error);
       }
     });
+  }
+
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if (event.latLng) {
+      this.latitude = event.latLng.lat();
+      this.longitude = event.latLng.lng();
+      this.markerPosition = { lat: this.latitude, lng: this.longitude };
+      this.evenement.lieu = `${this.latitude}, ${this.longitude}`;
+      this.exactCoordinatesEntered = true;
+    }
+  }
+
+  capitalizeTitle() {
+    if (this.evenement.titre) {
+      this.evenement.titre = this.evenement.titre.charAt(0).toUpperCase() + this.evenement.titre.slice(1);
+    }
   }
 }

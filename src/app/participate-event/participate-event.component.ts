@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service'; // Import the AuthService
 
 interface Event {
   _id: string;
@@ -23,7 +24,7 @@ export class ParticipateEventComponent implements OnInit {
   searchQuery: string = '';
   showModal: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {} // Inject the AuthService
 
   ngOnInit() {
     this.loadEvents();
@@ -50,7 +51,16 @@ export class ParticipateEventComponent implements OnInit {
   }
 
   participate(event: Event) {
-    this.http.put(`http://localhost:3000/api/events/${event._id}/participate`, {}).subscribe({
+    const userEmail = this.authService.getUserEmail();
+    if (!userEmail) {
+      console.error('User email is null. Redirecting to login.');
+      // Redirect to login or handle the case where the user email is null
+      return;
+    }
+
+    const participationData = { email: userEmail };
+
+    this.http.put(`http://localhost:3000/api/events/${event._id}/participate`, participationData).subscribe({
       next: () => {
         this.showModal = true; // Show the modal
         setTimeout(() => {

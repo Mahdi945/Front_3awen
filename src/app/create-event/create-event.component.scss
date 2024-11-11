@@ -1,10 +1,15 @@
 .create-event-container {
-  padding: 20px;
+  padding: 30px;
   font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .breadcrumb {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #6c757d;
 
   a {
     text-decoration: none;
@@ -13,49 +18,48 @@
 
     &:hover {
       text-decoration: underline;
+      color: #0056b3;
     }
   }
   
   span {
-    color: #6c757d;
+    color: #495057;
   }
 }
 
 .blue-title {
- 
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-bottom: 10px;
-    position: relative; // Corrected to position the underline correctly
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-bottom: 12px;
+  position: relative;
 
-    &::after {
-      content: '';
-      width: 50px;
-      height: 4px;
-      background-color: #007bff;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  &::after {
+    content: '';
+    width: 60px;
+    height: 5px;
+    background-color: #007bff;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
-
+}
 
 .event-form {
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Espace entre les champs */
-  background-color: #f8f9fa;
-  padding: 20px;
+  gap: 20px;
+  background-color: #ffffff;
+  padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -64,33 +68,46 @@
 }
 
 label {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: bold;
+  color: #333;
 }
 
 input, textarea {
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ced4da;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
 }
 
 textarea {
-  resize: vertical; /* Permet de redimensionner verticalement */
+  resize: vertical;
 }
 
 .submit-button {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
 
   &:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
@@ -100,17 +117,27 @@ textarea {
 
   input[type="file"] {
     flex: 1;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
   }
 
   .clear-button {
     background: none;
     border: none;
-    font-size: 32px; /* Taille de police plus grande */
-    color: #000000; /* Couleur noire */
+    font-size: 24px;
+    color: #6c757d;
     cursor: pointer;
     margin-left: 10px;
     padding: 0;
     line-height: 1;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #ff4d4f;
+    }
   }
 }
 
@@ -123,7 +150,8 @@ ul {
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #ced4da;
+    font-size: 0.9rem;
   }
 }
 
@@ -137,7 +165,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
@@ -145,4 +173,40 @@ ul {
   font-size: 24px;
   color: #28a745;
   margin-right: 10px;
+}
+
+.map-container {
+  border: 2px solid #ced4da;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  .map {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+.location-input {
+  display: flex;
+  align-items: center;
+
+  input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+  }
+
+  .map-icon {
+    margin-left: 10px;
+    font-size: 24px;
+    color: #1d1e1f;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
 }

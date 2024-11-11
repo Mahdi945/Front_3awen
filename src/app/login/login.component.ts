@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service'; // Import AuthService
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   errorMessage: string = ''; // Variable pour stocker le message d'erreur
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 
   onLogin(form: NgForm) {
     if (form.valid) {
@@ -31,6 +32,7 @@ export class LoginComponent {
         .subscribe(
           response => {
             console.log('Connexion réussie', response);
+            this.authService.login(response.token, response.user); // Store the token and user info
             this.router.navigate(['/accueil']); // Redirection après connexion réussie
           },
           error => {

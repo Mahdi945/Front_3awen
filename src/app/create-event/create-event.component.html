@@ -5,47 +5,74 @@
     <a routerLink="/accueil">Accueil</a> / <span>Créer un événement</span>
   </div>
 
-  <h1 class="blue-title">Demande de Création d'un Événement </h1>
+  <h1 class="blue-title">Demande de Création d'un Événement</h1>
 
-  <form class="event-form" (ngSubmit)="onSubmit()">
+  <form class="event-form" (ngSubmit)="onSubmit()" #eventForm="ngForm">
     <div class="form-group">
       <label for="organizer-name">Nom complet de l'organisateur :</label>
-      <input type="text" id="organizer-name" [(ngModel)]="evenement.nomOrganisateur" name="nomOrganisateur" required />
+      <input type="text" id="organizer-name" [(ngModel)]="evenement.nomOrganisateur" name="nomOrganisateur" required minlength="3" #nomOrganisateur="ngModel" />
+      <div *ngIf="nomOrganisateur.invalid && (nomOrganisateur.dirty || nomOrganisateur.touched)" class="error">
+        <div *ngIf="nomOrganisateur.errors?.['required']">Le nom complet est requis.</div>
+        <div *ngIf="nomOrganisateur.errors?.['minlength']">Le nom complet doit comporter au moins 3 caractères.</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="organizer-email">Adresse Email de l'organisateur :</label>
-      <input type="email" id="organizer-email" [(ngModel)]="evenement.emailOrganisateur" name="emailOrganisateur" required />
+      <input type="email" id="organizer-email" [(ngModel)]="evenement.emailOrganisateur" name="emailOrganisateur" required email #emailOrganisateur="ngModel" />
+      <div *ngIf="emailOrganisateur.invalid && (emailOrganisateur.dirty || emailOrganisateur.touched)" class="error">
+        <div *ngIf="emailOrganisateur.errors?.['required']">L'adresse email est requise.</div>
+        <div *ngIf="emailOrganisateur.errors?.['email']">L'adresse email n'est pas valide.</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="event-title">Titre de l'Événement :</label>
-      <input type="text" id="event-title" [(ngModel)]="evenement.titre" name="titre" required />
+      <input type="text" id="event-title" [(ngModel)]="evenement.titre" name="titre" required (blur)="capitalizeTitle()" #titre="ngModel" />
+      <div *ngIf="titre.invalid && (titre.dirty || titre.touched)" class="error">
+        <div *ngIf="titre.errors?.['required']">Le titre de l'événement est requis.</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="event-date">Date de l'Événement :</label>
-      <input type="date" id="event-date" [(ngModel)]="evenement.date" name="date" required />
+      <input type="date" id="event-date" [(ngModel)]="evenement.date" name="date" required #date="ngModel" />
+      <div *ngIf="date.invalid && (date.dirty || date.touched)" class="error">
+        <div *ngIf="date.errors?.['required']">La date de l'événement est requise.</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="event-time">Heure de l'Événement :</label>
-      <input type="time" id="event-time" [(ngModel)]="evenement.heure" name="heure" required />
+      <input type="time" id="event-time" [(ngModel)]="evenement.heure" name="heure" required #heure="ngModel" />
+      <div *ngIf="heure.invalid && (heure.dirty || heure.touched)" class="error">
+        <div *ngIf="heure.errors?.['required']">L'heure de l'événement est requise.</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="event-location">Lieu de l'Événement :</label>
-      <input type="text" id="event-location" [(ngModel)]="evenement.lieu" name="lieu" required />
+      <input type="text" id="event-location" [(ngModel)]="evenement.lieu" name="lieu" required #lieu="ngModel" />
+      <div *ngIf="lieu.invalid && (lieu.dirty || lieu.touched)" class="error">
+        <div *ngIf="lieu.errors?.['required']">Le lieu de l'événement est requis.</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="event-description">Description de l'Événement :</label>
-      <textarea id="event-description" [(ngModel)]="evenement.description" name="description" rows="4" required></textarea>
+      <textarea id="event-description" [(ngModel)]="evenement.description" name="description" rows="4" required #description="ngModel"></textarea>
+      <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+        <div *ngIf="description.errors?.['required']">La description de l'événement est requise.</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="event-volunteers">Nombre de Volontaires Requis :</label>
-      <input type="number" id="event-volunteers" [(ngModel)]="evenement.volontaires" name="volontaires" min="1" required />
+      <input type="number" id="event-volunteers" [(ngModel)]="evenement.volontaires" name="volontaires" min="1" required #volontaires="ngModel" />
+      <div *ngIf="volontaires.invalid && (volontaires.dirty || volontaires.touched)" class="error">
+        <div *ngIf="volontaires.errors?.['required']">Le nombre de volontaires est requis.</div>
+        <div *ngIf="volontaires.errors?.['min']">Le nombre de volontaires doit être au moins 1.</div>
+      </div>
     </div>
 
     <div class="form-group">
@@ -59,7 +86,7 @@
       </ul>
     </div>
 
-    <button type="submit" class="submit-button">Envoyer la demande</button>
+    <button type="submit" class="submit-button" [disabled]="eventForm.invalid">Envoyer la demande</button>
   </form>
 
   <div *ngIf="showSuccessMessage" class="success-message">

@@ -46,8 +46,15 @@
     background-color: #4bf8ea; /* Optionnel : ajouter un fond légèrement bleu pour l'effet visuel */
   
     h1 {
-      font-size: 2.5rem;
-      color: #333;
+      text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-bottom: 12px;
+  position: relative;
     }
   
     p {

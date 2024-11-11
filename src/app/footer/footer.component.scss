@@ -1,8 +1,10 @@
 .footer {
-    background-color: #5A2D91; /* Couleur violet */
-    color: #ffffff; /* Couleur du texte */
-    padding: 15px; /* Espacement */
-}
+    background: linear-gradient(135deg, #2575fc 0%, #2575fc 100%); /* Gradient from purple to blue */
+    color: #ffffff; /* Text color */
+    padding: 15px; /* Padding */
+    text-align: center; /* Center align text */
+    font-family: 'Arial', sans-serif; /* Font family */
+  }
 
 .footer-container {
     display: flex; /* Utilise flexbox pour l'alignement */

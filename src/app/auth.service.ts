@@ -1,17 +1,59 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/users'; // Remplacez par l'URL de votre API
+  private tokenKey: string = 'auth-token';
+  private userKey: string = 'user-info';
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  // Méthode d'inscription
-  register(userData: { firstName: string; lastName: string; email: string; password: string; phone: string; city: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem(this.tokenKey);
+  }
+
+  getToken(): string | null {
+    return sessionStorage.getItem(this.tokenKey);
+  }
+
+  getUserEmail(): string | null {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    return userInfo ? JSON.parse(userInfo).email : null;
+  }
+
+  getUserFirstName(): string | null {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    return userInfo ? JSON.parse(userInfo).firstName : null;
+  }
+
+  getUserLastName(): string | null {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    return userInfo ? JSON.parse(userInfo).lastName : null;
+  }
+
+  getUserPhone(): string | null {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    return userInfo ? JSON.parse(userInfo).phone : null;
+  }
+
+  getUserCity(): string | null {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    return userInfo ? JSON.parse(userInfo).city : null;
+  }
+
+  getUserId(): string | null {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    return userInfo ? JSON.parse(userInfo)._id : null;
+  }
+
+  login(token: string, user: any): void {
+    sessionStorage.setItem(this.tokenKey, token);
+    sessionStorage.setItem(this.userKey, JSON.stringify(user));
+  }
+
+  logout(): void {
+    sessionStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.userKey);
   }
 }

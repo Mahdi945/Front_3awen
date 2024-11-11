@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
-import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AccueilComponent } from './accueil/accueil.component';
@@ -17,17 +20,17 @@ import { ParticipateEventComponent } from './participate-event/participate-event
 import { PartnershipComponent } from './partnership/partnership.component';
 import { ContactComponent } from './contact/contact.component';
 import { LogoutComponent } from './logout/logout.component';
-import { FooterComponent } from './footer/footer.component'; // Ajout du footer
-import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { AdminComponent } from './admin/admin.component';
-import { LogAdminComponent } from './log-admin/log-admin.component'; // Importer HttpClientModule
-
-// Import pour Google OAuth
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { LogAdminComponent } from './log-admin/log-admin.component';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { NewPassComponent } from './new-pass/new-pass.component';
+import { IndexComponent } from './index/index.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+
+import { SpinnerService } from './spinner.service';
+import { SpinnerInterceptor } from './spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,27 +52,32 @@ import { NewPassComponent } from './new-pass/new-pass.component';
     AdminComponent,
     LogAdminComponent,
     ForgetPassComponent,
-    NewPassComponent
+    NewPassComponent,
+    IndexComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    SocialLoginModule 
+    SocialLoginModule,
+    GoogleMapsModule
   ],
   providers: [
+    SpinnerService,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
-        autoLogin: false, // Modifiez selon vos besoins
+        autoLogin: false, // Modify according to your needs
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('227936580507-vmrfhtno62vkofudvqsmit1916u1ng4n.apps.googleusercontent.com') // Remplacez par votre Client ID Google
+            provider: new GoogleLoginProvider('227936580507-vmrfhtno62vkofudvqsmit1916u1ng4n.apps.googleusercontent.com') // Replace with your Google Client ID
           }
         ]
-      } as SocialAuthServiceConfig,
+      } as SocialAuthServiceConfig
     }
   ],
   bootstrap: [AppComponent]
