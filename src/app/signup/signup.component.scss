@@ -3,115 +3,124 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-image: url('/assets/img2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-  .auth-card {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-    padding: 40px;
-    width: 700px;
-    max-width: 90%;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+.auth-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  width: 700px;
+  max-width: 90%;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-top: 120px;
+}
 
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
-    }
 
-    .auth-title {
-      margin-bottom: 30px;
-      color: #333;
-      font-size: 30px;
-      font-weight: bold;
-    }
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
+}
 
-    .input-group {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 25px;
+.auth-title {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 30px;
+  font-weight: bold;
+}
 
-      .form-field {
-        flex: 1;
-        margin-right: 15px;
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
 
-        &:last-child {
-          margin-right: 0;
-        }
+.form-field {
+  flex: 1;
+  margin-right: 15px;
+}
 
-        input, select {
-          width: 100%;
-          padding: 14px;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-          font-size: 16px;
-          transition: border-color 0.3s;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.form-field:last-child {
+  margin-right: 0;
+}
 
-          &:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-          }
-        }
-      }
-    }
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .checkbox-group {
-      text-align: left;
-      margin-bottom: 25px;
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
-      label {
-        font-size: 14px;
-        color: #666;
+.checkbox-group {
+  text-align: left;
+  margin-bottom: 25px;
+}
 
-        input {
-          margin-right: 10px;
-        }
-      }
-    }
+.checkbox-group label {
+  font-size: 14px;
+  color: #666;
+}
 
-    .auth-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 14px 30px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: background-color 0.3s, transform 0.3s;
+.checkbox-group input {
+  margin-right: 10px;
+}
 
-      &:hover {
-        background-color: #0056b3;
-        transform: scale(1.05);
-      }
-    }
+.auth-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.3s;
+}
 
-    .google-signin-container {
-      margin-top: 20px;
-      .g_id_signin {
-        display: inline-block;
-        margin-top: 10px;
-      }
-    }
+.auth-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
 
-    .success-message {
-      color: #155724;
-      background-color: #d4edda;
-      border: 1px solid #c3e6cb;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      font-size: 16px;
-      text-align: center;
-      font-weight: bold;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.google-signin-container {
+  margin-top: 20px;
+}
 
-      &:hover {
-        background-color: #c3e6cb;
-        border-color: #c3e6cb;
-      }
-    }
-  }
+.g_id_signin {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.success-message:hover {
+  background-color: #c3e6cb;
+  border-color: #c3e6cb;
 }

@@ -39,11 +39,11 @@
               }
             ],
             "styles": [
-              
+              "/assets/css/style.css",
               "src/styles.scss"
             ],
             "scripts": [
-             
+              "/assets/js/main.js"
             ]
           },
           "configurations": {

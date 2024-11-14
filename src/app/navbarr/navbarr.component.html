@@ -1,29 +1,119 @@
-<nav class="navbar">
-  <div class="logo">
-    <a routerLink="/accueil">
-      <img src="assets/logo5.png" alt="Logo" />
-    </a>
-  </div>
-  <ul class="nav-links">
-    <li><a routerLink="/accueil">Accueil</a></li>
-    <li><a routerLink="/create-event">Créer un évènement</a></li>
-    <li><a routerLink="/participate-event">Participer à un évènement</a></li>
-    <li><a routerLink="/partnership">Partenariat</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-    <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login">Connexion</a></li>
-    <li *ngIf="!authService.isLoggedIn()"><a routerLink="/signup">Inscription</a></li>
-    <li *ngIf="authService.isLoggedIn()"><a routerLink="/logout" class="logout">
-       Déconnexion <i class="fas fa-sign-out-alt"></i>
-    </a></li>
-  </ul>
-  <div class="user-profile" *ngIf="authService.isLoggedIn()">
-    <i class="fas fa-user-circle user-icon" (click)="toggleDropdown()"></i>
-    <div class="dropdown" *ngIf="dropdownOpen">
-      <p>Email: {{ authService.getUserEmail() }}</p>
-      <p>Nom: {{ authService.getUserFirstName() }} {{ authService.getUserLastName() }}</p>
-      <p>Téléphone: {{ authService.getUserPhone() }}</p>
-      <p>Ville: {{ authService.getUserCity() }}</p>
-      <!-- Add more user information here if needed -->
+<!-- Navbar Start -->
+<div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+  <!-- Top Bar -->
+  <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
+    <div class="col-lg-6 px-5 text-start">
+      <small><i class="fa fa-map-marker-alt me-2"></i>14 Sokrat Street, Ben Arous, Tunisia</small>
+      <small class="ms-4"><i class="fa fa-envelope me-2"></i>mahdibeyy&#64;gmail.com</small>
+    </div>
+    <div class="col-lg-6 px-5 text-end">
+      <small>Follow us:</small>
+      <a class="text-white-50 ms-3" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a class="text-white-50 ms-3" href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a class="text-white-50 ms-3" href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a class="text-white-50 ms-3" href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
   </div>
-</nav>
+
+  <!-- Navbar Start -->
+<div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+  <!-- Top Bar -->
+  <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
+    <div class="col-lg-6 px-5 text-start">
+      <small><i class="fa fa-map-marker-alt me-2"></i>14 Sokrat Street, Ben Arous, Tunisia</small>
+      <small class="ms-4"><i class="fa fa-envelope me-2"></i>mahdibeyy&#64;gmail.com</small>
+    </div>
+    <div class="col-lg-6 px-5 text-end">
+      <small>Follow us:</small>
+      <a class="text-white-50 ms-3" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a class="text-white-50 ms-3" href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a class="text-white-50 ms-3" href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a class="text-white-50 ms-3" href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+    <!-- Brand / Logo -->
+    <a routerLink="/accueil" class="navbar-brand ms-4 ms-lg-0">
+      <h1 class="fw-bold text-primary m-0 d-inline">3<span class="text-white">awen</span></h1>
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ms-auto p-4 p-lg-0">
+        <li><a routerLink="/accueil" class="nav-item nav-link">Home</a></li>
+
+        <li class="nav-item">
+          <a routerLink="/logout" class="nav-link">Log Out <i class="fas fa-sign-out-alt"></i></a>
+        </li>
+      </ul>
+
+      <!-- User Profile for Logged-in Users -->
+      <div class="user-profile ms-4" *ngIf="authService.isLoggedIn()">
+        <i class="fas fa-user-circle user-icon text-white" (click)="toggleDropdown()"></i>
+        <div class="dropdown" *ngIf="dropdownOpen">
+          <p>Email: {{ authService.getUserEmail() }}</p>
+          <p>Name: {{ authService.getUserFirstName() }} {{ authService.getUserLastName() }}</p>
+          <p>Phone: {{ authService.getUserPhone() }}</p>
+          <p>City: {{ authService.getUserCity() }}</p>
+          
+          <!-- Modal Trigger Button -->
+          <button type="button" class="btn btn-primary mt-3" (click)="openModal()">Update Profile</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<!-- Navbar End -->
+
+<!-- Modal for Profile Update -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileModalLabel">Update Your Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" value="{{ authService.getUserFirstName() }}" />
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" value="{{ authService.getUserLastName() }}" />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" value="{{ authService.getUserEmail() }}" disabled />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" value="{{ authService.getUserPhone() }}" />
+          </div>
+          <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" value="{{ authService.getUserCity() }}" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Update Data Button -->
+        <button type="button" class="btn btn-primary">Update Data</button>
+        <!-- Password Modification Link -->
+        <a href="/forget-pass" class="btn btn-secondary">Modifier Mot de Passe</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Modal -->
+
+<!-- Navbar End -->

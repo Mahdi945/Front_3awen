@@ -5,6 +5,7 @@
   
   .breadcrumb {
     margin-bottom: 10px;
+    background-color: transparent; 
   
     a {
       text-decoration: none;
@@ -14,9 +15,7 @@
         text-decoration: underline;
       }
     }
-    span {
-      color: #6c757d;
-    }
+   
   }
   
   .social-icons {
