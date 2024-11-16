@@ -47,6 +47,42 @@ export class AuthService {
     return userInfo ? JSON.parse(userInfo)._id : null;
   }
 
+  setUserFirstName(firstName: string): void {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    if (userInfo) {
+      const user = JSON.parse(userInfo);
+      user.firstName = firstName;
+      sessionStorage.setItem(this.userKey, JSON.stringify(user));
+    }
+  }
+
+  setUserLastName(lastName: string): void {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    if (userInfo) {
+      const user = JSON.parse(userInfo);
+      user.lastName = lastName;
+      sessionStorage.setItem(this.userKey, JSON.stringify(user));
+    }
+  }
+
+  setUserPhone(phone: string): void {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    if (userInfo) {
+      const user = JSON.parse(userInfo);
+      user.phone = phone;
+      sessionStorage.setItem(this.userKey, JSON.stringify(user));
+    }
+  }
+
+  setUserCity(city: string): void {
+    const userInfo = sessionStorage.getItem(this.userKey);
+    if (userInfo) {
+      const user = JSON.parse(userInfo);
+      user.city = city;
+      sessionStorage.setItem(this.userKey, JSON.stringify(user));
+    }
+  }
+
   login(token: string, user: any): void {
     sessionStorage.setItem(this.tokenKey, token);
     sessionStorage.setItem(this.userKey, JSON.stringify(user));

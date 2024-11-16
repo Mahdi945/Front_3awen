@@ -10,7 +10,6 @@
   
   <!-- Libraries Stylesheet -->
   <link href="/assets/lib/animate/animate.min.css" rel="stylesheet">
-  
   <link href="/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   
   <!-- Customized Bootstrap Stylesheet -->
@@ -20,30 +19,29 @@
   
   <!-- Template Stylesheet -->
   <link href="/assets/css/style.css" rel="stylesheet">
-  </head>
-
+</head>
 
 <app-navbarr></app-navbarr>
 <div class="auth-container">
   <div class="auth-card">
-    <h2 class="auth-title">Se connecter</h2>
+    <h2 class="auth-title">Log In</h2>
 
     <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
       <div class="input-group">
         <input type="email" name="email" ngModel placeholder="Email" required />
       </div>
       <div class="input-group">
-        <input type="password" name="pass" ngModel placeholder="Mot de passe" required />
+        <input type="password" name="pass" ngModel placeholder="Password" required />
       </div>
-      <button type="submit" class="auth-button">Connexion</button>
+      <button type="submit" class="auth-button">Log In</button>
     </form> <br>
     
-    <!-- Lien mot de passe oublié -->
+    <!-- Forgot Password Link -->
     <div class="forgot-password">
-      <a routerLink="/forget-pass">Mot de passe oublié ?</a>
+      <a routerLink="/forget-pass">Forgot Password?</a>
     </div>
     
-    <!-- Message d'erreur -->
+    <!-- Error Message -->
     <div *ngIf="errorMessage" class="error-message">
       {{ errorMessage }}
     </div>

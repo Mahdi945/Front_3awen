@@ -1,13 +1,27 @@
+/* Styles globaux ou dans le composant spécifique */
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 120vh; /* Prend toute la hauteur de la fenêtre */
+  width: 100%; /* Prend toute la largeur de la fenêtre */
   background-image: url('/assets/img2.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: cover; /* L'image couvre toute la zone */
+  background-position: center center; /* Centre l'image */
+  background-repeat: no-repeat; /* Empêche la répétition de l'image */
+  position: absolute; /* Assure que le fond couvre tout l'espace de la page */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Assure que l'image est en arrière-plan */
 }
+
+
 
 .auth-card {
   background-color: rgba(255, 255, 255, 0.95);
@@ -18,7 +32,7 @@
   max-width: 90%;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
-  margin-top: 120px;
+  margin-top: 170px;
 }
 
 
@@ -123,4 +137,15 @@
 .success-message:hover {
   background-color: #c3e6cb;
   border-color: #c3e6cb;
+}
+/* Styles pour le message d'erreur */
+.error-message {
+  color: #d9534f; /* Rouge pour l'erreur */
+  background-color: #f8d7da; /* Fond rouge clair */
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
 }

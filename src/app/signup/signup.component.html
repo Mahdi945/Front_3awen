@@ -10,7 +10,6 @@
   
   <!-- Libraries Stylesheet -->
   <link href="/assets/lib/animate/animate.min.css" rel="stylesheet">
-  
   <link href="/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   
   <!-- Customized Bootstrap Stylesheet -->
@@ -20,14 +19,20 @@
   
   <!-- Template Stylesheet -->
   <link href="/assets/css/style.css" rel="stylesheet">
-  </head>
+</head>
+
 <app-navbarr></app-navbarr>
 
 <div class="auth-container">
   <div class="auth-card">
-    <h2 class="auth-title">Créer un compte</h2>
+    <h2 class="auth-title">Create an Account</h2>
     
-    <!-- Message de succès -->
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    
+    <!-- Success Message -->
     <div *ngIf="successMessage" class="success-message">
       {{ successMessage }}
     </div>
@@ -35,64 +40,81 @@
     <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm" class="horizontal-form">
       <div class="input-group">
         <div class="form-field">
-          <input type="text" name="firstName" ngModel placeholder="Prénom" required />
+          <input type="text" name="firstName" ngModel placeholder="First Name" required minlength="2" maxlength="50" #firstName="ngModel" />
+          <div *ngIf="firstName.invalid && firstName.touched" class="error-message">
+            First name is required (2 to 50 characters).
+          </div>
         </div>
         <div class="form-field">
-          <input type="text" name="lastName" ngModel placeholder="Nom" required />
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="form-field">
-          <input type="email" name="email" ngModel placeholder="Email" required />
-        </div>
-        <div class="form-field">
-          <input type="password" name="password" ngModel placeholder="Mot de passe" required minlength="6" />
+          <input type="text" name="lastName" ngModel placeholder="Last Name" required minlength="2" maxlength="50" #lastName="ngModel" />
+          <div *ngIf="lastName.invalid && lastName.touched" class="error-message">
+            Last name is required (2 to 50 characters).
+          </div>
         </div>
       </div>
       <div class="input-group">
         <div class="form-field">
-          <input type="tel" name="phone" ngModel placeholder="Numéro de téléphone" required pattern="[0-9]*" minlength="8" maxlength="15" />
+          <input type="email" name="email" ngModel placeholder="Email" required email #email="ngModel" />
+          <div *ngIf="email.invalid && email.touched" class="error-message">
+            Email is required and must be valid.
+          </div>
+        </div>
+        <div class="form-field">
+          <input type="password" name="password" ngModel placeholder="Password" required minlength="6" #password="ngModel" />
+          <div *ngIf="password.invalid && password.touched" class="error-message">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="form-field">
+          <input type="tel" name="phone" ngModel placeholder="Phone Number" required pattern="[0-9]*" minlength="8" maxlength="15" #phone="ngModel" />
+          <div *ngIf="phone.invalid && phone.touched" class="error-message">
+            Phone number must be between 8 and 15 digits.
+          </div>
         </div>
         <div class="form-field city-select">
-         
-           
-              <select name="city" ngModel required>
-                <option value="" disabled selected>Sélectionner une ville</option>
-                <option value="Ariana">Ariana</option>
-                <option value="Béja">Béja</option>
-                <option value="Ben Arous">Ben Arous</option>
-                <option value="Bizerte">Bizerte</option>
-                <option value="Gabès">Gabès</option>
-                <option value="Gafsa">Gafsa</option>
-                <option value="Jendouba">Jendouba</option>
-                <option value="Kairouan">Kairouan</option>
-                <option value="Kasserine">Kasserine</option>
-                <option value="Kébili">Kébili</option>
-                <option value="Le Kef">Le Kef</option>
-                <option value="Mahdia">Mahdia</option>
-                <option value="La Manouba">La Manouba</option>
-                <option value="Médenine">Médenine</option>
-                <option value="Monastir">Monastir</option>
-                <option value="Nabeul">Nabeul</option>
-                <option value="Sfax">Sfax</option>
-                <option value="Sidi Bouzid">Sidi Bouzid</option>
-                <option value="Siliana">Siliana</option>
-                <option value="Sousse">Sousse</option>
-                <option value="Tataouine">Tataouine</option>
-                <option value="Tozeur">Tozeur</option>
-                <option value="Tunis">Tunis</option>
-                <option value="Zaghouan">Zaghouan</option>
-              </select>
-            </div>
-      
-          
+          <select name="city" ngModel required #city="ngModel">
+            <option value="" disabled selected>Select a city</option>
+            <option value="Ariana">Ariana</option>
+            <option value="Béja">Béja</option>
+            <option value="Ben Arous">Ben Arous</option>
+            <option value="Bizerte">Bizerte</option>
+            <option value="Gabès">Gabès</option>
+            <option value="Gafsa">Gafsa</option>
+            <option value="Jendouba">Jendouba</option>
+            <option value="Kairouan">Kairouan</option>
+            <option value="Kasserine">Kasserine</option>
+            <option value="Kébili">Kébili</option>
+            <option value="Le Kef">Le Kef</option>
+            <option value="Mahdia">Mahdia</option>
+            <option value="La Manouba">La Manouba</option>
+            <option value="Médenine">Médenine</option>
+            <option value="Monastir">Monastir</option>
+            <option value="Nabeul">Nabeul</option>
+            <option value="Sfax">Sfax</option>
+            <option value="Sidi Bouzid">Sidi Bouzid</option>
+            <option value="Siliana">Siliana</option>
+            <option value="Sousse">Sousse</option>
+            <option value="Tataouine">Tataouine</option>
+            <option value="Tozeur">Tozeur</option>
+            <option value="Tunis">Tunis</option>
+            <option value="Zaghouan">Zaghouan</option>
+          </select>
+          <div *ngIf="city.invalid && city.touched" class="error-message">
+            City is required.
+          </div>
+        </div>
       </div>
       <div class="checkbox-group">
         <label>
-          <input type="checkbox" name="terms" ngModel required /> J'accepte les conditions d'utilisation
+          <input type="checkbox" name="terms" ngModel required #terms="ngModel" /> I accept the terms of use
+          <div *ngIf="terms.invalid && terms.touched" class="error-message">
+            You must accept the terms of use.
+          </div>
         </label>
       </div>
-      <button type="submit" class="auth-button" [disabled]="registerForm.invalid">S'inscrire</button>
+      <button type="submit" class="auth-button" [disabled]="registerForm.invalid">Sign Up</button>
     </form>
 
     <!-- Google Sign-In Button -->

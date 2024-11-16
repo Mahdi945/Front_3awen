@@ -1,134 +1,163 @@
 .create-event-container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
-  margin-top: 120px;
-  padding: 30px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #333;
-}
-
-
- 
-.page-header {
-  padding-top: 12rem;
-  padding-bottom: 6rem;
-  background: linear-gradient(rgba(0, 29, 35, .8), rgba(0, 29, 35, .8)), url(/assets/img/carousel-1.jpg) center center no-repeat;
-  background-size: cover;
 }
 
 .blue-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #007bff;
-  margin-bottom: 25px;
+  color: #292b2b;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .event-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  .form-group {
+    margin-bottom: 20px;
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  
-  label {
-    font-weight: bold;
-    font-size: 16px;
-  }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
 
-  input, textarea {
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    transition: border 0.3s ease;
-    
-    &:focus {
-      border-color: #007bff;
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .error {
+      color: #d9534f;
+      margin-top: 5px;
     }
   }
 
-  .error {
-    font-size: 12px;
-    color: #dc3545;
-  }
-}
+  .file-selection-container {
+    display: flex;
+    align-items: center;
 
-textarea {
-  resize: vertical;
-}
+    input[type="file"] {
+      flex: 1;
+    }
 
-.file-selection-container {
-  display: flex;
-  gap: 10px;
-  input[type="file"] {
-    font-size: 14px;
+    .clear-button {
+      background: none;
+      border: none;
+      color: black;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
+      padding: 0;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #d9534f;
+      }
+    }
   }
-  .clear-button {
-    background-color: transparent;  // Pas de fond
-    color: #343a40;  // Couleur du texte noire (pour la croix)
-    border: none;  // Pas de bordure
-    font-size: 30px;  // Taille de la croix (symbole &times;)
-    cursor: pointer;  // Curseur pointer pour indiquer que c'est cliquable
-    padding: 0;  // Pas de padding supplémentaire
-    line-height: 1;  // Ajuster la hauteur de ligne pour que le symbole soit bien centré
-  
-    // Effet au survol (sur la couleur du texte)
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
     &:hover {
-      color: #dc3545;  // Change la couleur de la croix en rouge au survol
-    }
-  
-    // Effet au focus
-    &:focus {
-      outline: none;  // Enlever le contour par défaut
+      background-color: #0056b3;
     }
   }
-  
-}
 
-.submit-button {
-  padding: 12px 24px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  &:hover {
-    background-color: #0056b3;
-  }
-  &:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-}
+  .success-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+    text-align: center;
 
-.success-message {
-  margin-top: 30px;
-  padding: 15px;
-  background-color: #d4edda;
-  color: #155724;
-  border-radius: 8px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  .checkmark {
-    font-size: 20px;
+    .checkmark {
+      font-size: 24px;
+      margin-right: 10px;
+    }
   }
 }
 .breadcrumb{
   background-color: transparent; 
 }
 
+
+.input-group {
+  position: relative;
+}
+
+.input-group-append .google-maps-icon {
+  position: absolute;
+  right: 10px; /* Adjust as necessary */
+  top: 50%;
+  transform: translateY(-50%);
+  color: black; /* Icon color */
+  font-size: 1.25rem; /* Adjust size if necessary */
+  text-decoration: none; /* Remove underline */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it is above other content */
+}
+
+.modal-content {
+  padding: 20px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 20px; /* Ensure it is responsive */
+  animation: fadeInOut 5s forwards; /* Animation to fade out after 5 seconds */
+}
+
+.checkmark {
+  font-size: 48px;
+  color: #4CAF50; /* Green color for the checkmark */
+  display: block;
+  margin-bottom: 10px;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @media (max-width: 768px) {
   .create-event-container {
     padding: 20px;
@@ -138,8 +167,5 @@ textarea {
   }
   .form-group label {
     font-size: 14px;
-  }
-  .submit-button {
-    padding: 10px 20px;
   }
 }

@@ -9,7 +9,9 @@ import { AuthService } from '../auth.service'; // Import the AuthService
   styleUrls: ['./create-event.component.scss']
 })
 export class CreateEventComponent implements OnInit {
+  eventType: string = 'service'; // Set default eventType to 'service'
   evenement = {
+    eventType: 'service', // Set default eventType to 'service'
     nomOrganisateur: '',
     emailOrganisateur: '',
     titre: '',
@@ -19,7 +21,10 @@ export class CreateEventComponent implements OnInit {
     description: '',
     volontaires: 0,
     preuves: [] as File[],
-    id_user_organisateur: '' // Add userId to the event data
+    id_user_organisateur: '', // Add userId to the event data
+    goal: 0, // Add goal for fundraising events
+    deadline: '', // Add deadline for fundraising events
+    donateFor: '' // Add donateFor field
   };
 
   selectedFileNames: string[] = [];
@@ -75,34 +80,58 @@ export class CreateEventComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
+    formData.append('eventType', this.eventType); // Append eventType to the form data
     formData.append('nomOrganisateur', this.evenement.nomOrganisateur);
     formData.append('emailOrganisateur', this.evenement.emailOrganisateur);
     formData.append('titre', this.evenement.titre);
-    formData.append('date', this.evenement.date);
-    formData.append('heure', this.evenement.heure);
-    formData.append('lieu', this.evenement.lieu);
     formData.append('description', this.evenement.description);
-    formData.append('volontaires', this.evenement.volontaires.toString());
     formData.append('id_user_organisateur', this.evenement.id_user_organisateur); // Append userId to the form data
+
+    if (this.eventType === 'fundraising') {
+      formData.append('donateFor', this.evenement.donateFor); // Append donateFor to the form data
+      formData.append('goal', this.evenement.goal.toString());
+      formData.append('deadline', this.evenement.deadline);
+    }
 
     // Append the uploaded proof files
     for (let i = 0; i < this.evenement.preuves.length; i++) {
       formData.append('preuves', this.evenement.preuves[i]);
     }
 
-    this.http.post('http://localhost:3000/api/events/create', formData).subscribe({
-      next: (response: any) => {
-        console.log('Événement créé avec succès:', response);
-        this.showSuccessMessage = true;
-        setTimeout(() => {
-          this.showSuccessMessage = false;
-          this.router.navigate(['/accueil']);
-        }, 5000); // Masquer le message après 5 secondes
-      },
-      error: (error: any) => {
-        console.error('Erreur lors de la création de l\'événement:', error);
-      }
-    });
+    if (this.eventType === 'service') {
+      formData.append('date', this.evenement.date);
+      formData.append('heure', this.evenement.heure);
+      formData.append('lieu', this.evenement.lieu);
+      formData.append('volontaires', this.evenement.volontaires.toString());
+
+      this.http.post('http://localhost:3000/api/events/create', formData).subscribe({
+        next: (response: any) => {
+          console.log('Service event created successfully:', response);
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+            this.router.navigate(['/accueil']);
+          }, 5000); // Hide the message after 5 seconds
+        },
+        error: (error: any) => {
+          console.error('Error creating service event:', error);
+        }
+      });
+    } else if (this.eventType === 'fundraising') {
+      this.http.post('http://localhost:3000/api/events/create', formData).subscribe({
+        next: (response: any) => {
+          console.log('Fundraising event created successfully:', response);
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+            this.router.navigate(['/accueil']);
+          }, 5000); // Hide the message after 5 seconds
+        },
+        error: (error: any) => {
+          console.error('Error creating fundraising event:', error);
+        }
+      });
+    }
   }
 
   onMapClick(event: google.maps.MapMouseEvent) {

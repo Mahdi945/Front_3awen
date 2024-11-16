@@ -16,3 +16,60 @@
     color: #ffffff; // White color for header title
   }
 }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it is above other content */
+}
+
+.modal-content {
+  padding: 20px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 20px; /* Ensure it is responsive */
+  animation: fadeInOut 5s forwards; /* Animation to fade out after 5 seconds */
+}
+
+.modal-content.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.checkmark {
+  font-size: 48px;
+  color: #4CAF50; /* Green color for the checkmark */
+  display: block;
+  margin-bottom: 10px;
+}
+
+.checkmark.error {
+  color: #f44336; /* Red color for the error checkmark */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -27,59 +27,119 @@
   color: #FF6F0F;
 }
 
-/* Modal Styling */
+.modal-dialog {
+  max-width: 600px; /* Set a maximum width for the modal */
+  margin: 1.75rem auto; /* Center the modal vertically and horizontally */
+}
+
 .modal-content {
-  padding: 20px;
-  border-radius: 8px;
+  padding: 30px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-content:hover {
+  transform: scale(1.05); /* Slight scale effect when hovering */
 }
 
 .modal-header {
-  background-color: #343a40;
+  background-color: #047ef8; /* Dark background for header */
   color: #fff;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #eaf0f1; /* Distinct border to separate header */
+  padding-bottom: 20px;
 }
 
 .modal-body {
-  padding: 15px;
-}
-
-.form-label {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.form-control {
-  margin-top: 8px;
+  padding: 20px;
 }
 
 .modal-footer {
   display: flex;
-  justify-content: space-between;
-  padding: 15px;
+  justify-content: space-between; /* Space the buttons apart */
+  padding-top: 20px;
 }
+
+.modal-footer .btn {
+  width: 45%; /* Set a fixed width for the buttons */
+}
+
+.modal-footer .btn-secondary {
+  background-color: #6c757d; /* Custom color for secondary button */
+  border-color: #6c757d;
+}
+
+.modal-footer .btn-primary {
+  background-color: #086fd6; /* Custom color for primary button */
+  border-color: #086fd6;
+}
+
+.form-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #343a40; /* Darker text for labels */
+}
+
+.form-control {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #FF6F0F; /* Highlight border on focus */
+  outline: none;
+}
+
+
 
 /* Buttons */
 .btn-primary {
   background-color: #FF6F0F;
   border: none;
   color: #fff;
-  padding: 10px 20px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary:hover {
   background-color: #FF3D00;
+  transform: scale(1.05); /* Slight hover effect */
 }
 
 .btn-secondary {
   background-color: #6c757d;
   color: #fff;
-  padding: 10px 20px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-secondary:hover {
   background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+@media (max-width: 767px) {
+  .modal-content {
+    padding: 20px;
+  }
+  
+  .modal-header {
+    padding-bottom: 15px;
+  }
+
+  .form-control {
+    font-size: 0.9rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
 }

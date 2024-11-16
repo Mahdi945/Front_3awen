@@ -1,21 +1,27 @@
-<!-- Navbar Start -->
-<div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
-  <!-- Top Bar -->
-  <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
-    <div class="col-lg-6 px-5 text-start">
-      <small><i class="fa fa-map-marker-alt me-2"></i>14 Sokrat Street, Ben Arous, Tunisia</small>
-      <small class="ms-4"><i class="fa fa-envelope me-2"></i>mahdibeyy&#64;gmail.com</small>
-    </div>
-    <div class="col-lg-6 px-5 text-end">
-      <small>Follow us:</small>
-      <a class="text-white-50 ms-3" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a class="text-white-50 ms-3" href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a class="text-white-50 ms-3" href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a class="text-white-50 ms-3" href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-    </div>
-  </div>
-
-  <!-- Navbar Start -->
+<head> 
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
+  
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- Libraries Stylesheet -->
+  <link href="/assets/lib/animate/animate.min.css" rel="stylesheet">
+  
+  <link href="/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/assets/scss/bootstrap.scss" rel="stylesheet">
+  
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Template Stylesheet -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+  </head>
+  <nav>
 <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
   <!-- Top Bar -->
   <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
@@ -49,71 +55,91 @@
       <ul class="navbar-nav ms-auto p-4 p-lg-0">
         <li><a routerLink="/accueil" class="nav-item nav-link">Home</a></li>
 
-        <li class="nav-item">
+              <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Events
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+            <li><a routerLink="/create-event" class="dropdown-item">Create Event</a></li>
+            <li><a routerLink="/participate-event" class="dropdown-item">Participate in Event</a></li>
+            <li><a href="https://buy.stripe.com/test_7sIbMG0fU6ub7ew3cc" class="dropdown-item" target="_blank">Donate Now</a></li>
+          </ul>
+        </li>
+
+        <li><a routerLink="/partnership" class="nav-item nav-link">Partnership</a></li>
+        <li><a routerLink="/contact" class="nav-item nav-link">Contact</a></li>
+
+        <!-- Conditional Links for Authenticated Users -->
+        <li *ngIf="authService.isLoggedIn()" class="nav-item">
+          <a class="nav-link user-icon" data-bs-toggle="modal" data-bs-target="#userModal">
+            <i class="fas fa-user-circle"></i> Profile
+          </a>
+        </li>
+        <li *ngIf="authService.isLoggedIn()" class="nav-item">
           <a routerLink="/logout" class="nav-link">Log Out <i class="fas fa-sign-out-alt"></i></a>
         </li>
-      </ul>
 
-      <!-- User Profile for Logged-in Users -->
-      <div class="user-profile ms-4" *ngIf="authService.isLoggedIn()">
-        <i class="fas fa-user-circle user-icon text-white" (click)="toggleDropdown()"></i>
-        <div class="dropdown" *ngIf="dropdownOpen">
-          <p>Email: {{ authService.getUserEmail() }}</p>
-          <p>Name: {{ authService.getUserFirstName() }} {{ authService.getUserLastName() }}</p>
-          <p>Phone: {{ authService.getUserPhone() }}</p>
-          <p>City: {{ authService.getUserCity() }}</p>
+        <div class="d-none d-lg-flex ms-2" *ngIf="!authService.isLoggedIn()">
           
-          <!-- Modal Trigger Button -->
-          <button type="button" class="btn btn-primary mt-3" (click)="openModal()">Update Profile</button>
+            <!-- Sign Up Button -->
+            <a routerLink="/signup" class="btn btn-outline-primary py-2 px-3">
+              <i class="fa fa-user-check me-2"></i> <!-- Updated Icon -->
+              Sign Up
+            
+            </a>
+        
+          <!-- Log In Button -->
+          <a routerLink="/login" class="btn btn-outline-primary py-2 px-3 ms-2">
+            Log In
+            <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+              <i class="fa fa-arrow-right"></i>
+            </div>
+          </a>
         </div>
-      </div>
+        
+      </ul>
     </div>
   </nav>
 </div>
 <!-- Navbar End -->
 
-<!-- Modal for Profile Update -->
-<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+<!-- User Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="profileModalLabel">Update Your Profile</h5>
+        <h5 class="modal-title" id="userModalLabel">User Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
           <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" [value]="authService.getUserEmail()" readonly />
+          </div>
+          <div class="mb-3">
             <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="firstName" value="{{ authService.getUserFirstName() }}" />
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" />
           </div>
           <div class="mb-3">
             <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastName" value="{{ authService.getUserLastName() }}" />
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" value="{{ authService.getUserEmail() }}" disabled />
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" />
           </div>
           <div class="mb-3">
             <label for="phone" class="form-label">Phone</label>
-            <input type="text" class="form-control" id="phone" value="{{ authService.getUserPhone() }}" />
+            <input type="text" class="form-control" id="phone" [(ngModel)]="phone" name="phone" />
           </div>
           <div class="mb-3">
             <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control" id="city" value="{{ authService.getUserCity() }}" />
+            <input type="text" class="form-control" id="city" [(ngModel)]="city" name="city" />
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <!-- Update Data Button -->
-        <button type="button" class="btn btn-primary">Update Data</button>
-        <!-- Password Modification Link -->
-        <a href="/forget-pass" class="btn btn-secondary">Modifier Mot de Passe</a>
+        <a routerLink="/forget-pass" class="btn btn-secondary">Reset Password</a>
+        <button class="btn btn-primary" (click)="updateCredentials()">Update Credentials</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- End Modal -->
-
-<!-- Navbar End -->
+</nav>
