@@ -31,6 +31,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 
 import { SpinnerService } from './spinner.service';
 import { SpinnerInterceptor } from './spinner.interceptor';
+import { DonationSuccessComponent } from './donation-success/donation-success.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SpinnerInterceptor } from './spinner.interceptor';
     ForgetPassComponent,
     NewPassComponent,
     IndexComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DonationSuccessComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../auth.service'; // Import the AuthService
-import { loadStripe } from '@stripe/stripe-js'; // Import the Stripe library
+import { AuthService } from '../auth.service'; // Import AuthService
+import { loadStripe } from '@stripe/stripe-js'; // Stripe pour le paiement
 
 interface Event {
   _id: string;
@@ -14,8 +14,8 @@ interface Event {
   heure: string;
   lieu: string;
   eventType: string; // Type de l'événement (service ou fundraising)
-  goal?: number; // Pour les événements de fundraising
-  deadline?: string; // Pour les événements de fundraising
+  goal?: number; // Objectif pour les événements de fundraising
+  deadline?: string; // Deadline pour les événements de fundraising
   isApproved: boolean;
   eventImage: string;
 }
@@ -83,7 +83,6 @@ export class ParticipateEventComponent implements OnInit {
     const query = this.searchQuery.toLowerCase();
     this.http.get<Event[]>(`http://localhost:3000/api/events/search?query=${query}`).subscribe({
       next: (events) => {
-        // Filter events into service and fundraising categories
         this.filteredServiceEvents = events.filter(event => event.eventType === 'service');
         this.filteredFundraisingEvents = events.filter(event => event.eventType === 'fundraising');
       },
@@ -102,7 +101,7 @@ export class ParticipateEventComponent implements OnInit {
     this.http.put(`http://localhost:3000/api/events/${event._id}/participate`, participationData).subscribe({
       next: () => {
         this.showModal = true;
-        this.modalMessage = 'Thank you for participating! The organizer will contact you soon.';
+        this.modalMessage = 'Merci pour votre participation! L\'organisateur vous contactera bientôt.';
         setTimeout(() => {
           this.showModal = false;
           this.loadEvents();
@@ -137,7 +136,8 @@ export class ParticipateEventComponent implements OnInit {
 
     this.http.post<{ sessionId: string }>('http://localhost:3000/api/checkoutSession', {
       items: [{ name: event.titre, amount: donationAmount * 100, quantity: 1 }],
-      eventId: event._id, // Inclure l'ID de l'événement pour tracer
+      eventId: event._id, // Passer l'ID de l'événement à Stripe via les métadonnées
+      donationAmount: donationAmount, // Ajout du montant du don dans les métadonnées
     }).subscribe({
       next: (response) => {
         stripe?.redirectToCheckout({ sessionId: response.sessionId }).then((result) => {
@@ -150,26 +150,10 @@ export class ParticipateEventComponent implements OnInit {
     });
   }
 
-  // Appeler l'API backend pour mettre à jour l'objectif après un don réussi
-  updateEventGoal(eventId: string, donationAmount: number) {
-    this.http.put<{ remainingGoal: number }>(`http://localhost:3000/api/events/${eventId}/updateGoal`, {
-      eventId,
-      donationAmount,
-    }).subscribe({
-      next: (response) => {
-        const event = this.fundraisingEvents.find((e) => e._id === eventId);
-        if (event && event.goal !== undefined) {
-          event.goal = response.remainingGoal; // Mettre à jour l'objectif de l'événement
-        }
-      },
-      error: (error) => console.error('Erreur lors de la mise à jour de l\'objectif :', error),
-    });
-  }
-
   proceedWithDonation() {
     if (this.selectedEvent && this.donationAmount > 0) {
       this.donateNow(this.selectedEvent, this.donationAmount);
-      this.showDonationModal = false; // Fermer le modal après validation
+      this.showDonationModal = false;
     } else {
       console.error('Montant du don invalide ou événement non sélectionné.');
     }
