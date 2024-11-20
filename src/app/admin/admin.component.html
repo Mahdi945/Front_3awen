@@ -1,7 +1,66 @@
-<!-- admin.component.html -->
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Admin Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#gestion-utilisateurs">Gestion des Utilisateurs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#gestion-demandes">Gestion des Demandes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#gestion-evenements">Gestion des Événements</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar End -->
+
 <br>
-<div class="admin-container">
+
+<!-- Gestion des Utilisateurs Start -->
+<div id="gestion-utilisateurs" class="admin-container">
+  <h2>Gestion des Utilisateurs</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>City</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.city }}</td>
+        <td>
+          <button class="download-btn" (click)="deleteUser(user._id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Gestion des Utilisateurs End -->
+
+<br>
+
+<!-- Gestion des Demandes Start -->
+<div id="gestion-demandes" class="admin-container">
   <h2>Gestion des Demandes des Événements</h2> <br>
+
+  <h3>Service Events</h3>
   <table>
     <thead>
       <tr>
@@ -11,22 +70,65 @@
         <th>Date</th>
         <th>Heure</th>
         <th>Lieu</th>
-        <th>Description</th>
-        <th>Volontaires</th>
+        <th>Image</th>
         <th>Preuves</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let event of events">
+      <tr *ngFor="let event of serviceEvents; let i = index">
         <td>{{ event.nomOrganisateur }}</td>
         <td>{{ event.emailOrganisateur }}</td>
         <td>{{ event.titre }}</td>
         <td>{{ event.date }}</td>
         <td>{{ event.heure }}</td>
         <td>{{ event.lieu }}</td>
-        <td>{{ event.description }}</td>
-        <td>{{ event.volontaires }}</td>
+        <td>
+          <button class="view-btn" (click)="toggleImage(event.eventImage)">
+            Visualiser
+          </button>
+        </td>
+        <td>
+          <button class="download-btn" (click)="downloadProofs(event._id)" *ngIf="event.preuves && event.preuves.length">
+            Télécharger Preuves
+          </button>
+        </td>
+        <td class="actions">
+          <button class="approve-btn" (click)="approveEvent(event._id)" [disabled]="event.isApproved">Approuver</button>
+          <button class="reject-btn" (click)="rejectEvent(event._id)">Refuser</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Fundraising Events</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom de l'Organisateur</th>
+        <th>Email de l'Organisateur</th>
+        <th>Titre</th>
+        <th>Donate For</th>
+        <th>Goal</th>
+        <th>Deadline</th>
+        <th>Image</th>
+        <th>Preuves</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of fundraisingEvents; let i = index">
+        <td>{{ event.nomOrganisateur }}</td>
+        <td>{{ event.emailOrganisateur }}</td>
+        <td>{{ event.titre }}</td>
+        <td>{{ event.donateFor }}</td>
+        <td>{{ event.goal }}</td>
+        <td>{{ event.deadline }}</td>
+        <td>
+          <button class="view-btn" (click)="toggleImage(event.eventImage)">
+            Visualiser
+          </button>
+        </td>
         <td>
           <button class="download-btn" (click)="downloadProofs(event._id)" *ngIf="event.preuves && event.preuves.length">
             Télécharger Preuves
@@ -40,3 +142,182 @@
     </tbody>
   </table>
 </div>
+<!-- Gestion des Demandes End -->
+
+<br>
+
+<!-- Gestion des Événements Start -->
+<div id="gestion-evenements" class="admin-container">
+  <h2>Gestion des Événements</h2>
+
+  <h3>Approved Service Events</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom de l'Organisateur</th>
+        <th>Email de l'Organisateur</th>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Lieu</th>
+        <th>Volontaires</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of approvedServiceEvents; let i = index">
+        <td>{{ event.nomOrganisateur }}</td>
+        <td>{{ event.emailOrganisateur }}</td>
+        <td>{{ event.titre }}</td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.heure }}</td>
+        <td>{{ event.lieu }}</td>
+        <td>{{ event.volontaires }}</td>
+        <td class="actions">
+          <button class="download-btn" (click)="openUpdateModal(event, 'service')">Update</button>
+          <button class="download-btn" (click)="deleteApprovedEvent(event._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Approved Fundraising Events</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom de l'Organisateur</th>
+        <th>Email de l'Organisateur</th>
+        <th>Titre</th>
+        <th>Donate For</th>
+        <th>Goal</th>
+        <th>Deadline</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of approvedFundraisingEvents; let i = index">
+        <td>{{ event.nomOrganisateur }}</td>
+        <td>{{ event.emailOrganisateur }}</td>
+        <td>{{ event.titre }}</td>
+        <td>{{ event.donateFor }}</td>
+        <td>{{ event.goal }}</td>
+        <td>{{ event.deadline }}</td>
+        <td class="actions">
+          <button class="download-btn" (click)="openUpdateModal(event, 'fundraising')">Update</button>
+          <button class="download-btn" (click)="deleteApprovedEvent(event._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Gestion des Événements End -->
+
+<!-- Update Modal -->
+<div *ngIf="showUpdateModal" class="modal" (click)="closeUpdateModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Update Event</h2>
+    <form [formGroup]="updateForm" (ngSubmit)="updateEvent()">
+      <div class="form-group">
+        <label for="titre">Titre</label>
+        <input type="text" id="titre" formControlName="titre" class="form-control">
+      </div>
+      <div *ngIf="selectedEventType === 'service'">
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" formControlName="date" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="heure">Heure</label>
+          <input type="time" id="heure" formControlName="heure" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="lieu">Lieu</label>
+          <input type="text" id="lieu" formControlName="lieu" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="volontaires">Volontaires</label>
+          <input type="number" id="volontaires" formControlName="volontaires" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description" class="form-control"></textarea>
+        </div>
+      </div>
+      <div *ngIf="selectedEventType === 'fundraising'">
+        <div class="form-group">
+          <label for="donateFor">Donate For</label>
+          <input type="text" id="donateFor" formControlName="donateFor" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="goal">Goal</label>
+          <input type="number" id="goal" formControlName="goal" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="deadline">Deadline</label>
+          <input type="date" id="deadline" formControlName="deadline" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description" class="form-control"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+      <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()" style="float: right;">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* Couleur du texte des éléments de la navbar */
+  html {
+    scroll-behavior: smooth;
+  }
+  .navbar-nav .nav-link {
+    color: #343a40 !important; /* Couleur noir clair */
+    font-weight: bold; /* Texte en gras pour plus de lisibilité */
+    transition: color 0.3s ease; /* Transition douce pour le survol */
+  }
+
+  /* Changement de couleur au survol */
+  .navbar-nav .nav-link:hover {
+    color: #555; /* Gris foncé au survol */
+    text-decoration: underline; /* Soulignement au survol */
+  }
+
+  /* Couleur de fond de la navbar */
+  .navbar {
+    background-color: #f8f9fa; /* Fond clair */
+    border-bottom: 2px solid #ddd; /* Ligne de séparation */
+  }
+
+  /* Bouton hamburger (mode mobile) */
+  .navbar-toggler-icon {
+    background-color: #343a40; /* Icône du menu en noir clair */
+  }
+
+  /* Marges pour espacer les sections */
+  .admin-container {
+    margin: 20px;
+  }
+
+  /* Modal styles */
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 90%;
+  }
+</style>

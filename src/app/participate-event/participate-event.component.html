@@ -1,4 +1,3 @@
-<!-- participate-event.component.html -->
 <head> 
   <!-- Google Web Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,56 +15,271 @@
   
   <!-- Customized Bootstrap Stylesheet -->
   <link href="/assets/scss/bootstrap.scss" rel="stylesheet">
-  
   <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
   
   <!-- Template Stylesheet -->
   <link href="/assets/css/style.css" rel="stylesheet">
-  </head>
-  <app-navbarr></app-navbarr>
-   <!-- Page Header Start -->
-   <div class="container-fluid page-header mb-5 wow fadeIn custom-header" data-wow-delay="0.1s">
-    <div class="container text-center">
-        <h1 class="display-4 text-white animated slideInDown mb-4">Events List</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a class="text-white" routerLink="/accueil">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" >Events</a></li>
-                <li class="breadcrumb-item text-primary active" aria-current="page">Participate in Events </li>
-            </ol>
-        </nav>
-    </div>
+</head>
+
+<app-navbarr></app-navbarr>
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 wow fadeIn custom-header" data-wow-delay="0.1s">
+  <div class="container text-center">
+      <h1 class="display-4 text-white animated slideInDown mb-4">Events List</h1>
+      <nav aria-label="breadcrumb animated slideInDown">
+          <ol class="breadcrumb justify-content-center mb-0">
+              <li class="breadcrumb-item"><a class="text-white" routerLink="/accueil">Home</a></li>
+              <li class="breadcrumb-item"><a class="text-white" >Events</a></li>
+              <li class="breadcrumb-item text-primary active" aria-current="page">Participate in Events </li>
+          </ol>
+      </nav>
   </div>
-<div class="create-event-container">
- 
-  <div class="participate-event-container">
-    <h2>Participer aux Événements</h2>
-    <div class="search-bar">
-      <input type="text" placeholder="Rechercher par titre ou lieu" [(ngModel)]="searchQuery" (input)="searchEvents()">
-      <button class="search-btn" (click)="searchEvents()">OK</button>
+</div>
+
+<div class="container-xxl bg-light my-5 py-5">
+  <div class="container py-5">
+    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+      <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Participate Events</div>
+      <h1 class="display-6 mb-5">Join Our Upcoming Events</h1>
+      <!-- Barre de recherche -->
+      <div class="input-group mb-4">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Search by Title, Organizer Name, or Location..." 
+          [(ngModel)]="searchQuery" 
+          (input)="searchEvents()">
+        <button class="btn btn-primary" type="button" (click)="searchEvents()">Search</button>
+      </div>
     </div>
-    <div class="event-cards">
-      <div class="event-card" *ngFor="let event of filteredEvents">
-        <h3>{{ event.nomOrganisateur }}</h3>
-        <p><strong>Titre:</strong> {{ event.titre }}</p>
-        <p><strong>Date:</strong> {{ event.date }}</p>
-        <p><strong>Heure:</strong> {{ event.heure }}</p>
-        <p><strong>Lieu:</strong> {{ event.lieu }}</p>
-        <p><strong>Participants requis:</strong> {{ event.volontaires }}</p>
-        <button class="participate-btn" [disabled]="event.volontaires === 0" (click)="participate(event)">Participer</button>
+
+    <!-- Section pour les événements de Service -->
+    <div class="section-header mb-5">
+      <h2 style="color: #FF6F0F; text-align: center;">Service Events</h2>
+
+    </div>
+    <div class="event-carousel">
+      <div class="row g-4 justify-content-center">
+        <!-- Affiche les événements de service, selon le nombre visible -->
+        <div *ngFor="let event of filteredServiceEvents.slice(0, visibleEventsCountService)" class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="event-card d-flex flex-column bg-white border-top border-5 border-primary rounded-top overflow-hidden h-100 event-hover">
+            <div class="event-header text-center p-4 pt-0">
+              <h5 class="mb-3">{{ event.titre }}</h5>
+              <!-- Détails pour les événements de Service -->
+              <div *ngIf="event.eventType === 'service'">
+                <div class="service-details">
+                  <p><strong>Volunteers Required:</strong> {{ event.volontaires }}</p>
+                  <p><strong>Date:</strong> {{ event.date }}</p>
+                  <p><strong>Time:</strong> {{ event.heure }}</p>
+                </div>
+                <div class="position-relative mt-auto">
+                  <img class="img-fluid" [src]="event.eventImage" alt="Event Image">
+                  <div class="causes-overlay">
+                    <a class="btn btn-outline-primary" (click)="showEventDetails(event)">
+                      Read More
+                      <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                        <i class="fa fa-arrow-right"></i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bouton Participer -->
+            <div class="d-flex justify-content-center mt-auto">
+              <button class="participate-btn btn btn-outline-primary" (click)="participate(event)" [disabled]="event.volontaires === 0">
+                Participate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bouton flèche pour voir plus d'événements de service -->
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-primary" (click)="loadMoreEvents('service')">
+          <i class="fas fa-arrow-right"></i> See More
+        </button>
+      </div>
+    </div>
+
+    <!-- Section pour les événements de Fundraising -->
+    <div class="section-header mb-5 mt-5">
+      <h2 style="color: #FF6F0F; text-align: center;">Fundraising Events</h2>
+
+    </div>
+    <div class="event-carousel">
+      <div class="row g-4 justify-content-center">
+        <!-- Affiche les événements de fundraising, selon le nombre visible -->
+        <div *ngFor="let event of filteredFundraisingEvents.slice(0, visibleEventsCountFundraising)" class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="event-card d-flex flex-column bg-white border-top border-5 border-primary rounded-top overflow-hidden h-100 event-hover">
+            <div class="event-header text-center p-4 pt-0">
+              <h5 class="mb-3">{{ event.titre }}</h5>
+              <!-- Détails pour les événements de Fundraising -->
+              <div *ngIf="event.eventType === 'fundraising'">
+                <div class="fundraising-details">
+                  <p><strong>Goal:</strong> ${{ event.goal }}</p>
+                  <p><strong>Deadline:</strong> {{ event.deadline }}</p>
+                </div>
+                <div class="position-relative mt-auto">
+                  <img class="img-fluid" [src]="event.eventImage" alt="Event Image">
+                  <div class="causes-overlay">
+                    <a class="btn btn-outline-primary" (click)="showEventDetails(event)">
+                      Read More
+                      <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                        <i class="fa fa-arrow-right"></i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bouton Donate Now -->
+            <div class="d-flex justify-content-center mt-auto">
+              <button class="donate-btn btn btn-outline-primary" (click)="openDonationModal(event)">
+                Donate Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bouton flèche pour voir plus d'événements de fundraising -->
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-primary" (click)="loadMoreEvents('fundraising')">
+          <i class="fas fa-arrow-right"></i> See More
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" [class.show]="showModal">
+      <div class="modal-content">
+        <div class="checkmark-circle">
+          <div class="background"></div>
+          <div class="checkmark"></div>
+        </div>
+        <p>Thank you for your Patrcipation,we will contact you soon</p>
+      </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div class="modal" [class.show]="showEventDetailsModal">
+      <div class="modal-content">
+        <h2>Event Details</h2>
+        <p><strong>Organizer Name:</strong> {{ modalContent.nomOrganisateur }}</p>
+        <p><strong>Organizer Email:</strong> {{ modalContent.emailOrganisateur }}</p>
+        <p><strong>Description:</strong> {{ modalContent.description }}</p>
+        <button class="btn btn-primary" (click)="showEventDetailsModal = false">Close</button>
+      </div>
+    </div>
+
+    <!-- Donation Modal -->
+    <div class="modal" [class.show]="showDonationModal">
+      <div class="modal-content">
+        <h2>Enter Donation Amount</h2>
+        <input type="number" [(ngModel)]="donationAmount" placeholder="Enter amount" class="form-control mb-3" />
+        <p>You will be redirected to Stripe for payment.</p>
+        <button class="btn btn-primary" (click)="proceedWithDonation()">Proceed</button>
+        <button class="btn btn-secondary" (click)="showDonationModal = false">Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal" [class.show]="showModal">
-  <div class="modal-content">
-    <div class="checkmark-circle">
-      <div class="background"></div>
-      <div class="checkmark"></div>
-    </div>
-    <p>Merci pour votre noble initiative, l'organisateur va bientôt vous appeler pour la confirmation.</p>
-  </div>
-</div>
 <app-footer></app-footer>
+
+<!-- CSS for hover effect and overlay -->
+<style>
+  .event-hover {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .event-hover:hover {
+    transform: scale(1.05);
+    border-color: rgba(204, 132, 0, 0.7) !important; /* Darker orange color */
+    box-shadow: 0 4px 10px rgba(204, 132, 0, 0.7); /* Darker orange color with transparency */
+    background-color: rgba(204, 132, 0, 0.7); /* Darker orange color with transparency */
+  }
+
+  .event-hover .causes-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(204, 132, 0, 0.7); /* Darker orange color with transparency */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .event-hover:hover .causes-overlay {
+    opacity: 1;
+  }
+
+  .read-more-btn {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal.show {
+    display: flex;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .checkmark-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .checkmark {
+    font-size: 48px;
+    color: #fff;
+  }
+</style>

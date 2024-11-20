@@ -14,6 +14,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { NewPassComponent } from './new-pass/new-pass.component';
 import { AuthGuard } from './auth.guard'; // Import the AuthGuard
+import { IndexComponent } from './index/index.component'; // Import the AppIndexComponent
 
 const routes: Routes = [
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }, // Default route
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'log-admin', component: LogAdminComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }, // Protected route
   { path: 'forget-pass', component: ForgetPassComponent },
-  { path: 'new-pass', component: NewPassComponent }
+  { path: 'new-pass', component: NewPassComponent },
+  { path: 'app-index', component: IndexComponent }, // New route for AppIndexComponent
 ];
 
 @NgModule({

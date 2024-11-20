@@ -43,7 +43,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-             
+             "node_modules/wow.js/dist/wow.min.js"
+
             ]
           },
           "configurations": {

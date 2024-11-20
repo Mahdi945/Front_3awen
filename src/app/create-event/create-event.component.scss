@@ -7,6 +7,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.breadcrumb {
+  background-color: transparent;
+}
+
 .blue-title {
   color: #292b2b;
   text-align: center;
@@ -36,29 +40,102 @@
     .error {
       color: #d9534f;
       margin-top: 5px;
+      font-size: 14px; // Taille légèrement réduite
     }
   }
 
-  .file-selection-container {
-    display: flex;
-    align-items: center;
+  .input-group {
+    position: relative; // Permet de positionner l'icône par rapport à l'input
 
-    input[type="file"] {
-      flex: 1;
+    input[type="text"] {
+      width: 100%;
+      padding-right: 45px; // Ajoute un espace pour éviter que le texte ne chevauche l'icône
+      padding-left: 10px;
+      box-sizing: border-box;
+      height: 40px; // Hauteur cohérente
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #007bff; // Bordure bleue lorsqu'il est actif
+        outline: none; // Supprime le contour par défaut
+      }
     }
 
-    .clear-button {
-      background: none;
-      border: none;
-      color: black;
-      font-size: 24px;
-      cursor: pointer;
-      margin-left: 10px;
-      padding: 0;
+    .google-maps-icon {
+      position: absolute;
+      right: 13px; // Place l'icône à 10px du bord droit
+      top: 50%; // Centre verticalement par rapport à l'input
+      transform: translateY(-50%); // Ajuste pour aligner parfaitement au centre
+      font-size: 20px; // Taille de l'icône
+      color: #04061b; // Couleur bleue pour l'icône
+      cursor: pointer; // Ajoute un curseur pointer
+      text-decoration: none; // Supprime la décoration de lien
       transition: color 0.3s ease;
 
       &:hover {
-        color: #d9534f;
+        color: #0056b3; // Change la couleur en bleu foncé au survol
+      }
+    }
+  }
+
+  .event-image-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 18px;
+    margin-bottom: 10px;
+
+    i {
+      margin-right: 10px;
+      font-size: 24px;
+    }
+  }
+
+  .image-upload-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #f9f9f9;
+
+    &:hover {
+      border-color: #007bff;
+    }
+
+    .event-image-input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 48px;
+      color: #ccc;
+    }
+
+    .image-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
       }
     }
   }
@@ -76,96 +153,36 @@
       background-color: #0056b3;
     }
   }
+ 
 
-  .success-message {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #dff0d8;
-    color: #3c763d;
-    border: 1px solid #d6e9c6;
-    border-radius: 4px;
-    text-align: center;
 
-    .checkmark {
-      font-size: 24px;
-      margin-right: 10px;
+  
+
+  .file-selection-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    input[type="file"] {
+      flex: 1;
     }
-  }
-}
-.breadcrumb{
-  background-color: transparent; 
-}
 
+    .clear-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: black;
+      font-size: 30px;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.3s ease;
 
-.input-group {
-  position: relative;
-}
-
-.input-group-append .google-maps-icon {
-  position: absolute;
-  right: 10px; /* Adjust as necessary */
-  top: 50%;
-  transform: translateY(-50%);
-  color: black; /* Icon color */
-  font-size: 1.25rem; /* Adjust size if necessary */
-  text-decoration: none; /* Remove underline */
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 1000; /* Ensure it is above other content */
-}
-
-.modal-content {
-  padding: 20px;
-  background-color: #dff0d8;
-  color: #3c763d;
-  border: 1px solid #d6e9c6;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  margin: 0 20px; /* Ensure it is responsive */
-  animation: fadeInOut 5s forwards; /* Animation to fade out after 5 seconds */
-}
-
-.checkmark {
-  font-size: 48px;
-  color: #4CAF50; /* Green color for the checkmark */
-  display: block;
-  margin-bottom: 10px;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@media (max-width: 768px) {
-  .create-event-container {
-    padding: 20px;
-  }
-  .blue-title {
-    font-size: 24px;
-  }
-  .form-group label {
-    font-size: 14px;
+      &:hover {
+        color: #d9534f;
+      }
+    }
   }
 }

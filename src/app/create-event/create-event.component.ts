@@ -28,6 +28,8 @@ export class CreateEventComponent implements OnInit {
   };
 
   selectedFileNames: string[] = [];
+  selectedImage: File | null = null;
+  selectedImagePreview: string | ArrayBuffer | null = null;
   isModalOpen: boolean = false;
   showSuccessMessage: boolean = false;
   exactCoordinatesEntered: boolean = false;
@@ -69,6 +71,20 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
+  onImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedImage = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          this.selectedImagePreview = e.target.result;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   clearFileSelection() {
     this.selectedFileNames = [];
     this.evenement.preuves = [];
@@ -98,40 +114,32 @@ export class CreateEventComponent implements OnInit {
       formData.append('preuves', this.evenement.preuves[i]);
     }
 
+    // Append the selected image file
+    if (this.selectedImage) {
+      formData.append('eventImage', this.selectedImage);
+    }
+
     if (this.eventType === 'service') {
       formData.append('date', this.evenement.date);
       formData.append('heure', this.evenement.heure);
       formData.append('lieu', this.evenement.lieu);
       formData.append('volontaires', this.evenement.volontaires.toString());
-
-      this.http.post('http://localhost:3000/api/events/create', formData).subscribe({
-        next: (response: any) => {
-          console.log('Service event created successfully:', response);
-          this.showSuccessMessage = true;
-          setTimeout(() => {
-            this.showSuccessMessage = false;
-            this.router.navigate(['/accueil']);
-          }, 5000); // Hide the message after 5 seconds
-        },
-        error: (error: any) => {
-          console.error('Error creating service event:', error);
-        }
-      });
-    } else if (this.eventType === 'fundraising') {
-      this.http.post('http://localhost:3000/api/events/create', formData).subscribe({
-        next: (response: any) => {
-          console.log('Fundraising event created successfully:', response);
-          this.showSuccessMessage = true;
-          setTimeout(() => {
-            this.showSuccessMessage = false;
-            this.router.navigate(['/accueil']);
-          }, 5000); // Hide the message after 5 seconds
-        },
-        error: (error: any) => {
-          console.error('Error creating fundraising event:', error);
-        }
-      });
     }
+
+    this.http.post('http://localhost:3000/api/events/create', formData).subscribe({
+      next: (response: any) => {
+        console.log('Event created successfully:', response);
+        
+        this.showSuccessMessage = true;
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+          location.reload();
+        }, 5000); // Hide the message after 5 seconds
+      },
+      error: (error: any) => {
+        console.error('Error creating event:', error);
+      }
+    });
   }
 
   onMapClick(event: google.maps.MapMouseEvent) {

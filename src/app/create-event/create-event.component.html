@@ -39,6 +39,21 @@
   <h1 class="blue-title">Event Creation Request</h1>
   <form class="event-form" (ngSubmit)="onSubmit()" #eventForm="ngForm">
     <div class="form-group">
+      <label for="event-image" class="event-image-label">
+        <i class="fa fa-image"></i> Event Photo
+      </label>
+      <div class="image-upload-container">
+        <input type="file" id="event-image" (change)="onImageSelected($event)" class="event-image-input" accept="image/*" required/>
+        <div class="upload-icon" *ngIf="!selectedImagePreview">
+          <i class="fa fa-upload"></i>
+        </div>
+        <div class="image-preview" *ngIf="selectedImagePreview">
+          <img [src]="selectedImagePreview" alt="Event Image Preview" />
+        </div>
+        
+      </div>
+    </div>
+    <div class="form-group">
       <label for="event-type">Event Type:</label>
       <select id="event-type" [(ngModel)]="eventType" name="eventType" required>
         <option value="service">Service Event</option>
@@ -93,19 +108,31 @@
           <div *ngIf="heure.errors?.['required']">Event time is required.</div>
         </div>
       </div>
-   <div class="form-group">
-  <label for="event-location">Event Location:</label>
-  <div class="input-group">
-    <input type="text" id="event-location" [(ngModel)]="evenement.lieu" name="lieu" required #lieu="ngModel" class="form-control" />
-    
-     
-    
-  </div>
-  <div *ngIf="lieu.invalid && (lieu.dirty || lieu.touched)" class="error">
-    <div *ngIf="lieu.errors?.['required']">Event location is required.</div>
-  </div>
-</div>
-
+      <div class="form-group">
+        <label for="event-location">Event Location:</label>
+        <div class="input-group">
+          <input
+            type="text"
+            id="event-location"
+            [(ngModel)]="evenement.lieu"
+            name="lieu"
+            required
+            #lieu="ngModel"
+            class="form-control"
+          />
+          <a
+            href="https://www.google.com/maps"
+            target="_blank"
+            class="google-maps-icon"
+            aria-label="Open Google Maps"
+          >
+            <i class="fa fa-map-marker"></i>
+          </a>
+        </div>
+        <div *ngIf="lieu.invalid && (lieu.dirty || lieu.touched)" class="error">
+          <div *ngIf="lieu.errors?.['required']">Event location is required.</div>
+        </div>
+      </div>
       
       <div class="form-group">
         <label for="event-volunteers">Number of Volunteers Required:</label>
@@ -118,8 +145,11 @@
     </div>
     <div *ngIf="eventType === 'fundraising'">
       <div class="form-group">
-        <label for="fundraising-goal">Fundraising Goal:</label>
-        <input type="number" id="fundraising-goal" [(ngModel)]="evenement.goal" name="goal" required #goal="ngModel" />
+        <label for="fundraising-goal">Fundraising Goal:($)</label>
+        <div class="input-group">
+         
+          <input type="number" id="fundraising-goal" [(ngModel)]="evenement.goal" name="goal" required #goal="ngModel" class="form-control" />
+        </div>
         <div *ngIf="goal.invalid && (goal.dirty || goal.touched)" class="error">
           <div *ngIf="goal.errors?.['required']">Fundraising goal is required.</div>
         </div>
@@ -140,24 +170,62 @@
       </div>
     </div>
     <div class="form-group">
-        <label for="event-proof">Proofs to provide credibility:</label>
-        <div class="file-selection-container">
-          <input type="file" id="event-proof" (change)="onFileSelected($event)" multiple />
-          <button type="button" class="clear-button" (click)="clearFileSelection()">&times;</button>
-        </div>
-        <ul>
-          <li *ngFor="let fileName of selectedFileNames">{{ fileName }}</li>
-        </ul>
+      <label for="event-proof">Proofs to provide credibility:</label>
+      <div class="file-selection-container">
+        <input type="file" id="event-proof" (change)="onFileSelected($event)" multiple />
+        <button type="button" class="clear-button" (click)="clearFileSelection()">&times;</button>
       </div>
-  
+      <ul>
+        <li *ngFor="let fileName of selectedFileNames">{{ fileName }}</li>
+      </ul>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-  <div *ngIf="showSuccessMessage" class="modal-overlay">
-    <div class="modal-content">
-      <span class="checkmark">✔</span>
-      <p>Your request has been sent, you will be contacted by the admins soon.</p>
-    </div>
+  <div 
+  *ngIf="showSuccessMessage" 
+  style="
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 1000;">
+  
+  <div 
+    style="
+      background-color: #ffffff; 
+      color: #4caf50; 
+      border-radius: 10px; 
+      text-align: center; 
+      padding: 30px 40px; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+      max-width: 400px; 
+      width: 100%; 
+      animation: fadeInScale 0.4s ease;">
+    
+    <span 
+      style="
+        font-size: 70px; 
+        color: #4caf50; 
+        margin-bottom: 20px; 
+        display: inline-block; 
+        animation: popIn 0.5s ease;">✔</span>
+    
+    <p 
+      style="
+        color: #555; 
+        font-size: 16px; 
+        margin: 0; 
+        line-height: 1.5;">
+      Your request has been sent, you will be contacted by the admins soon.
+    </p>
   </div>
+</div>
 
 </div>
+
 <app-footer></app-footer>

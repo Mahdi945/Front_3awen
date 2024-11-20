@@ -32,6 +32,7 @@ export class ContactComponent {
         this.showSuccessMessage = true;
         setTimeout(() => {
           this.showSuccessMessage = false;
+          location.reload(); // Refresh the page after 5 seconds
         }, 5000); // Hide the message after 5 seconds
       },
       error: (error: any) => {
@@ -39,6 +40,7 @@ export class ContactComponent {
         this.showErrorMessage = true;
         setTimeout(() => {
           this.showErrorMessage = false;
+          location.reload(); // Refresh the page after 5 seconds
         }, 5000); // Hide the message after 5 seconds
       }
     });

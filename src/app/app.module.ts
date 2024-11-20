@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { GoogleMapsModule } from '@angular/google-maps';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -62,7 +62,8 @@ import { SpinnerInterceptor } from './spinner.interceptor';
     FormsModule,
     HttpClientModule,
     SocialLoginModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    ReactiveFormsModule 
   ],
   providers: [
     SpinnerService,

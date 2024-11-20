@@ -1,111 +1,127 @@
-// Global table styling
-table {
-  width: 100%;
-  border-collapse: collapse;
+.admin-container {
+  padding: 20px;
   background-color: #f9f9f9;
-  font-family: 'Roboto', sans-serif;
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
 
-  th, td {
-    padding: 12px 15px;
-    text-align: left;
+  h2 {
+    text-align: center;
+    color: #333;
   }
 
-  thead {
-    background-color: #007BFF; // Primary blue color
-    color: white;
+  h3 {
+    margin-top: 20px;
+    color: #007BFF; // Primary blue color
+  }
 
-    th {
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-size: 14px;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+    }
+
+    thead {
+      background-color: #007BFF; // Primary blue color
+      color: white;
+
+      th {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 14px;
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: #f1f1f1;
+        }
+
+        &:hover {
+          background-color: #e0f7fa; // Light hover effect
+        }
+
+        td {
+          border-bottom: 1px solid #ddd;
+        }
+      }
     }
   }
 
-  tbody {
-    tr {
-      &:nth-child(even) {
-        background-color: #f1f1f1;
-      }
+  // Button styling
+  button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &.approve-btn, &.reject-btn {
+      background-color: #007bff; // Blue for both approve and reject
+      color: white;
+      width: 100px; // Ensure same width
+      height: 60px;
+      margin-right: 10px; // Add space between buttons
 
       &:hover {
-        background-color: #e0f7fa; // Light hover effect
-      }
-
-      td {
-        border-bottom: 1px solid #ddd;
+        background-color: #0056b3;
       }
     }
-  }
-}
 
-// Button styling
-button {
-  padding: 8px 12px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+    &.download-btn {
+      background-color: #007bff; // Blue for download
+      color: white;
+      margin-right: 0; // Remove right margin for the last button in the row
 
-  &:hover {
-    transform: scale(1.05);
-  }
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
 
-  &.approve-btn, &.reject-btn {
-    background-color: #007bff; // Blue for both approve and reject
-    color: white;
-    width: 100px; // Ensure same width
-    height: 40px;
-    margin-right: 10px; // Add space between buttons
-
-    &:hover {
-      background-color: #0056b3;
+    &:disabled {
+      background-color: #6c757d; // Gray for disabled state
+      cursor: not-allowed;
     }
   }
 
-  &.download-btn {
-    background-color: #007bff; // Blue for download
-    color: white;
-    margin-right: 0; // Remove right margin for the last button in the row
+  // Flexbox container for action buttons
+  .actions {
+    display: flex; // Ensure buttons are displayed horizontally
 
-    &:hover {
-      background-color: #0056b3;
+    button {
+      margin-right: 10px; // Add space between buttons
+    }
+
+    button:last-child {
+      margin-right: 0; // Remove right margin for the last button
     }
   }
 
-  &:disabled {
-    background-color: #6c757d; // Gray for disabled state
-    cursor: not-allowed;
-  }
-}
+  // Responsive styling
+  @media (max-width: 768px) {
+    table {
+      font-size: 14px;
+    }
 
-// Flexbox container for action buttons
-.actions {
-  display: flex; // Ensure buttons are displayed horizontally
+    th, td {
+      padding: 10px;
+    }
 
-  button {
-    margin-right: 10px; // Add space between buttons
+    button {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
   }
-
-  button:last-child {
-    margin-right: 0; // Remove right margin for the last button
-  }
-}
-
-// Responsive styling
-@media (max-width: 768px) {
-  table {
-    font-size: 14px;
-  }
-
-  th, td {
-    padding: 10px;
-  }
-
-  button {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-  
 }
