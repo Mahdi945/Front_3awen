@@ -121,6 +121,7 @@
               <div *ngIf="event.eventType === 'fundraising'">
                 <div class="fundraising-details">
                   <p><strong>Goal:</strong> ${{ event.goal }}</p>
+                  <p><strong>Raised:</strong> ${{ event.raisedAmount || 0 }}</p> <!-- Afficher le montant levé -->
                   <p><strong>Deadline:</strong> {{ event.deadline }}</p>
                 </div>
                 <div class="position-relative mt-auto">

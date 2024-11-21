@@ -16,6 +16,7 @@ interface Event {
   eventType: string; // Type de l'événement (service ou fundraising)
   goal?: number; // Objectif pour les événements de fundraising
   deadline?: string; // Deadline pour les événements de fundraising
+  raisedAmount?: number; // Montant collecté pour les événements de fundraising
   isApproved: boolean;
   eventImage: string;
 }
