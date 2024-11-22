@@ -1,9 +1,9 @@
-<head> 
+<head>
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -20,7 +20,7 @@
     
     <!-- Template Stylesheet -->
     <link href="/assets/css/style.css" rel="stylesheet">
-    </head>
+</head>
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
@@ -51,10 +51,10 @@
                 <a class="btn btn-link" href="/app-index">Testimonial</a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-4">Search</h5>
-                <form id="searchForm" class="d-flex" onsubmit="return searchPage()">
-                    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" id="searchInput">
-                    <button class="btn btn-primary" type="submit">Search</button>
+                <h5 class="text-light mb-4">Subscribe to our Newsletter</h5>
+                <form id="newsletterForm" class="d-flex" (ngSubmit)="subscribeToNewsletter()">
+                    <input class="form-control me-2" type="email" placeholder="Enter your email" aria-label="Email" id="emailInput" [(ngModel)]="email" name="email" required style="width: 300px;">
+                    <button class="btn btn-primary" type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
@@ -74,23 +74,59 @@
 </div>
 <!-- Footer End -->
 
-<script>
-function searchPage() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const elements = document.querySelectorAll('body *');
+<!-- Success Modal -->
+<div *ngIf="showSuccessModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-icon">
+      <i class="fa fa-check-circle"></i>
+    </div>
+    <h2>Success</h2>
+    <p>You are subscribed successfully to our newsletter!</p>
+  </div>
+</div>
 
-    for (let element of elements) {
-        if (element.textContent.toLowerCase().includes(query)) {
-            element.scrollIntoView({ behavior: 'smooth' });
-            element.style.backgroundColor = 'yellow'; // Highlight the found element
-            setTimeout(() => {
-                element.style.backgroundColor = ''; // Remove highlight after 3 seconds
-            }, 3000);
-            return false; // Prevent form submission
-        }
-    }
+<style>
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
 
-    alert('No matches found.');
-    return false; // Prevent form submission
-}
-</script>
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-icon {
+    font-size: 50px;
+    color: green;
+    margin-bottom: 20px;
+  }
+
+  .modal-content h2 {
+    margin-bottom: 1rem;
+  }
+
+  .modal-content p {
+    margin-bottom: 1.5rem;
+  }
+  .text-danger {
+    color: red;
+  }
+</style>

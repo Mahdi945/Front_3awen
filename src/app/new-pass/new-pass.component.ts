@@ -13,6 +13,7 @@ export class NewPassComponent {
   confirmPassword: string = '';
   errorMessage: string = ''; // Message d'erreur pour la validation
   token: string = ''; // Jeton de réinitialisation
+  showSuccessModal: boolean = false; // Pour contrôler l'affichage du modal
 
   constructor(
     private http: HttpClient,
@@ -32,15 +33,17 @@ export class NewPassComponent {
         newPassword: this.newPassword,  // changer 'password' à 'newPassword'
         token: this.token
       };
-      
 
       // Appel à l'API pour réinitialiser le mot de passe
       this.http.post('http://localhost:3000/api/users/reset-password', data)
         .subscribe(
           (response: any) => {
             console.log('Mot de passe réinitialisé avec succès', response);
-            // Rediriger vers la page de connexion après le succès
-            this.router.navigate(['/login']);
+            this.showSuccessModal = true; // Afficher le modal de succès
+            setTimeout(() => {
+              this.showSuccessModal = false;
+              this.router.navigate(['/login']); // Rediriger vers la page de connexion après le succès
+            }, 3000); // Masquer le modal après 3 secondes
           },
           (error: any) => {
             console.error('Erreur lors de la réinitialisation du mot de passe', error);

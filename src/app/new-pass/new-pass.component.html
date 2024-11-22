@@ -1,48 +1,145 @@
 <div class="container">
-    <h2 class="text-center">Réinitialiser le mot de passe</h2>
-  
-    <!-- Message d'erreur si les mots de passe ne correspondent pas -->
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
-  
-    <!-- Formulaire pour entrer le nouveau mot de passe -->
-    <form (ngSubmit)="onSubmit(newPassForm)" #newPassForm="ngForm">
-      <div class="form-group">
-        <label for="newPassword">Nouveau mot de passe</label>
-        <input
-          type="password"
-          id="newPassword"
-          name="newPassword"
-          class="form-control"
-          required
-          minlength="8"
-          [(ngModel)]="newPassword"
-          #newPasswordInput="ngModel"
-        />
-        <div *ngIf="newPasswordInput.invalid && newPasswordInput.touched" class="text-danger">
-          Le mot de passe doit contenir au moins 8 caractères.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="confirmPassword">Confirmer le mot de passe</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          class="form-control"
-          required
-          [(ngModel)]="confirmPassword"
-          #confirmPasswordInput="ngModel"
-        />
-        <div *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched" class="text-danger">
-          Veuillez confirmer votre mot de passe.
-        </div>
-      </div>
-  
-      <!-- Bouton pour soumettre le formulaire -->
-      <button type="submit" class="btn btn-primary" [disabled]="newPassForm.invalid">Réinitialiser</button>
-    </form>
+  <h2 class="text-center">Réinitialiser le mot de passe</h2>
+
+  <!-- Message d'erreur si les mots de passe ne correspondent pas -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
   </div>
-  
+
+  <!-- Formulaire pour entrer le nouveau mot de passe -->
+  <form (ngSubmit)="onSubmit(newPassForm)" #newPassForm="ngForm" class="new-pass-form">
+    <div class="form-group">
+      <label for="newPassword">Nouveau mot de passe</label>
+      <input
+        type="password"
+        id="newPassword"
+        name="newPassword"
+        class="form-control"
+        required
+        minlength="8"
+        [(ngModel)]="newPassword"
+        #newPasswordInput="ngModel"
+      />
+      <div *ngIf="newPasswordInput.invalid && newPasswordInput.touched" class="text-danger">
+        Le mot de passe doit contenir au moins 8 caractères.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmer le mot de passe</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        class="form-control"
+        required
+        [(ngModel)]="confirmPassword"
+        #confirmPasswordInput="ngModel"
+      />
+      <div *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched" class="text-danger">
+        Veuillez confirmer votre mot de passe.
+      </div>
+    </div>
+
+    <!-- Bouton pour soumettre le formulaire -->
+    <button type="submit" class="btn btn-primary" [disabled]="newPassForm.invalid">Réinitialiser</button>
+  </form>
+
+  <!-- Success Modal -->
+  <div *ngIf="showSuccessModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <i class="fa fa-check-circle"></i>
+      </div>
+      <h2>Succès</h2>
+      <p>Votre mot de passe a été réinitialisé avec succès !</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .container {
+    max-width: 500px;
+    margin: 130px auto 0; /* Add top margin to move the container lower */
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-center {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-control {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .text-danger {
+    color: red;
+    margin-top: 5px;
+  }
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-icon {
+    font-size: 50px;
+    color: green;
+    margin-bottom: 20px;
+  }
+
+  .modal-content h2 {
+    margin-bottom: 1rem;
+  }
+
+  .modal-content p {
+    margin-bottom: 1.5rem;
+  }
+</style>

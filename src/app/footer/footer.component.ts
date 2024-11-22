@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';  // Pour les appels HTTP
+import { Router } from '@angular/router';  // Pour la redirection
 
 @Component({
   selector: 'app-footer',
@@ -6,27 +8,40 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  // Search query model
-  searchQuery: string = '';
-  
-  // Example content to filter
-  contentItems: any[] = [
-    { title: 'Item 1', description: 'This is some text related to item 1. Keywords here: JavaScript, front-end.' },
-    { title: 'Item 2', description: 'This text is related to item 2. Keywords: search, filter, JavaScript.' },
-    { title: 'Item 3', description: 'This is item 3. It contains other text and some different keywords.' },
-  ];
+  email: string = '';  // Pour stocker l'email de l'utilisateur
+  successMessage: string = '';  // Message de succès après l'abonnement
+  errorMessage: string = '';    // Message d'erreur en cas de problème
+  showSuccessModal: boolean = false; // Pour contrôler l'affichage du modal
 
-  // Function to filter content based on the search query
-  searchContent() {
-    const query = this.searchQuery.toLowerCase();
+  private apiUrl = 'http://localhost:3000/api/newsletter/subscribe';  // L'URL de votre API pour gérer l'abonnement
 
-    // Filter the content items based on the search query
-    this.contentItems.forEach(item => {
-      const contentText = `${item.title} ${item.description}`.toLowerCase();
-      // Here we just log the items that match the query (you can use this result to display content)
-      if (contentText.includes(query)) {
-        console.log('Found match:', item);
-      }
-    });
+  constructor(private http: HttpClient, private router: Router) {}
+
+  // Méthode appelée lors de la soumission du formulaire
+  subscribeToNewsletter() {
+    if (this.email) {
+      const subscriberData = { email: this.email };
+
+      // Envoi des données à l'API backend pour l'abonnement
+      this.http.post(this.apiUrl, subscriberData).subscribe({
+        next: (response) => {
+          this.successMessage = 'Vous êtes maintenant abonné à notre newsletter !';
+          this.errorMessage = ''; // Réinitialiser le message d'erreur
+          this.showSuccessModal = true; // Afficher le modal de succès
+          setTimeout(() => {
+            this.showSuccessModal = false;
+            this.router.navigate(['/']); // Rediriger vers la page d'accueil après 3 secondes
+          }, 3000); // Masquer le modal après 3 secondes
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'abonnement', error);
+          if (error.status === 400 && error.error.message === 'Cet email est déjà abonné.') {
+            this.errorMessage = 'Cet email est déjà abonné.';
+          } else {
+            this.errorMessage = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+          }
+        }
+      });
+    }
   }
 }
