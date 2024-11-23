@@ -14,3 +14,93 @@ nav {
       }
     }
   }
+
+/* Bouton flottant */
+.floating-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: #FF6F0F;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+.floating-button:hover {
+  background-color: #E65C00;
+}
+
+/* Panneau de notation */
+.rating-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  width: 300px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: none;
+  z-index: 1000;
+}
+
+.rating-panel.active {
+  display: block;
+}
+
+.rating-panel h5 {
+  margin-bottom: 10px;
+  color: #FF6F0F;
+}
+
+.rating-panel select,
+.rating-panel textarea,
+.rating-panel button {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.rating-panel textarea {
+  resize: none;
+  height: 100px;
+}
+
+.rating-panel .btn-submit {
+  background-color: #FF6F0F;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.rating-panel .btn-submit:hover {
+  background-color: #E65C00;
+}
+
+.rating-panel .btn-cancel {
+  background-color: #ccc;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.rating-panel .btn-cancel:hover {
+  background-color: #aaa;
+}
+
+/* Message de confirmation */
+.confirmation-message {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 5px;
+  z-index: 1000;
+}

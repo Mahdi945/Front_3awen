@@ -1,3 +1,30 @@
 <app-spinner></app-spinner>
 <router-outlet></router-outlet>
 
+<!-- Bouton flottant -->
+<div class="floating-button" (click)="toggleRatingPanel()">
+  <i class="fa fa-star"></i>
+</div>
+
+<!-- Panneau de notation -->
+<div class="rating-panel" [class.active]="isRatingPanelVisible">
+  <h5>Donnez votre note</h5>
+  <form (ngSubmit)="submitRating()">
+    <label for="rating">Votre note :</label>
+    <select id="rating" [(ngModel)]="rating" name="rating" required>
+      <option value="5">★★★★★</option>
+      <option value="4">★★★★☆</option>
+      <option value="3">★★★☆☆</option>
+      <option value="2">★★☆☆☆</option>
+      <option value="1">★☆☆☆☆</option>
+    </select>
+    <textarea [(ngModel)]="feedback" name="feedback" rows="3" placeholder="Laissez un commentaire (facultatif)"></textarea>
+    <button type="submit" class="btn-submit">Envoyer</button>
+    <button type="button" class="btn-cancel" (click)="toggleRatingPanel()">Annuler</button>
+  </form>
+</div>
+
+<!-- Message de confirmation -->
+<div class="confirmation-message" *ngIf="isSubmitted">
+  <p>Votre avis a été soumis avec succès. Merci pour votre retour !</p>
+</div>
