@@ -58,7 +58,7 @@ closeDropdown(): void {
   }
 
   loadFundraisingEvents() {
-    this.http.get<Event[]>('http://localhost:3000/api/events/fundraising-events').subscribe({
+    this.http.get<Event[]>('http://localhost:3000/api/events/donation-events').subscribe({
       next: (data) => {
         this.fundraisingEvents = data;
       },

@@ -31,6 +31,11 @@
 <!-- Main Container -->
 <div class="container">
   <h2 style="text-align: center;">Event Management</h2>
+  <br>
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search events..." [(ngModel)]="searchQuery" (input)="searchEvents()">
+  </div>
 
   <!-- Service Events Table -->
   <h3>Approved Service Events</h3>
@@ -48,7 +53,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let event of approvedServiceEvents">
+      <tr *ngFor="let event of filteredServiceEvents">
         <td>{{ event.nomOrganisateur }}</td>
         <td>{{ event.emailOrganisateur }}</td>
         <td>{{ event.titre }}</td>
@@ -59,7 +64,7 @@
         <td>
           <div class="dropdown">
             <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              
+          
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" (click)="openUpdateModal(event, 'service')">Update</a></li>
@@ -86,7 +91,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let event of approvedFundraisingEvents">
+      <tr *ngFor="let event of filteredFundraisingEvents">
         <td>{{ event.nomOrganisateur }}</td>
         <td>{{ event.emailOrganisateur }}</td>
         <td>{{ event.titre }}</td>
@@ -224,6 +229,20 @@
   .container {
     margin-left: 270px;
     padding: 20px;
+  }
+
+  /* Search Bar Styles */
+  .search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .search-bar input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
   }
 
   /* Table Styles */

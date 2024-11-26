@@ -28,10 +28,13 @@ interface Event {
 export class EventmanagementComponent implements OnInit {
   approvedServiceEvents: Event[] = [];
   approvedFundraisingEvents: Event[] = [];
+  filteredServiceEvents: Event[] = [];
+  filteredFundraisingEvents: Event[] = [];
   showUpdateModal: boolean = false;
   selectedEvent: Event | null = null;
   selectedEventType: string | null = null;
   updateForm: FormGroup;
+  searchQuery: string = '';
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.updateForm = this.fb.group({
@@ -56,6 +59,7 @@ export class EventmanagementComponent implements OnInit {
     this.http.get<Event[]>('http://localhost:3000/api/events/approvedServices').subscribe({
       next: (data) => {
         this.approvedServiceEvents = data;
+        this.filteredServiceEvents = data;
       },
       error: (err) => {
         console.error('Error fetching service events:', err);
@@ -64,14 +68,29 @@ export class EventmanagementComponent implements OnInit {
   }
 
   loadApprovedFundraisingEvents() {
-    this.http.get<Event[]>('http://localhost:3000/api/events/approvedFundraisings').subscribe({
+    this.http.get<Event[]>('http://localhost:3000/api/events/approvedFundraising').subscribe({
       next: (data) => {
         this.approvedFundraisingEvents = data;
+        this.filteredFundraisingEvents = data;
       },
       error: (err) => {
         console.error('Error fetching fundraising events:', err);
       }
     });
+  }
+
+  searchEvents() {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredServiceEvents = this.approvedServiceEvents.filter(event =>
+      event.titre.toLowerCase().includes(query) ||
+      event.nomOrganisateur.toLowerCase().includes(query) ||
+      event.lieu?.toLowerCase().includes(query)
+    );
+    this.filteredFundraisingEvents = this.approvedFundraisingEvents.filter(event =>
+      event.titre.toLowerCase().includes(query) ||
+      event.nomOrganisateur.toLowerCase().includes(query) ||
+      event.lieu?.toLowerCase().includes(query)
+    );
   }
 
   openUpdateModal(event: Event, eventType: string) {
@@ -110,7 +129,6 @@ export class EventmanagementComponent implements OnInit {
     });
   }
 
-
   deleteApprovedEvent(eventId: string) {
     this.http.delete(`http://localhost:3000/api/events/approved/${eventId}`).subscribe({
       next: () => {
@@ -123,5 +141,4 @@ export class EventmanagementComponent implements OnInit {
       }
     });
   }
-
 }
