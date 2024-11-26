@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>3awen</title>
   <base href="/">
-  
+
   <!-- Favicon -->
   <link href="img/favicon.ico" rel="icon">
   
@@ -26,12 +26,24 @@
   <link href="/assets/scss/bootstrap.scss" rel="stylesheet">
   <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
- 
-  
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en', // Langue par défaut de la page
+            includedLanguages: 'en,fr,ar', // Langues disponibles
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
+
+
   <app-root></app-root>
 
   <!-- JavaScript Libraries -->

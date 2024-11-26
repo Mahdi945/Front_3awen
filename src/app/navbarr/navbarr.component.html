@@ -105,7 +105,7 @@
 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header modal-header-orange">
         <h5 class="modal-title" id="userModalLabel">User Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -134,10 +134,27 @@
         </form>
       </div>
       <div class="modal-footer">
-        <a routerLink="/forget-pass" class="btn btn-secondary">Reset Password</a>
-        <button class="btn btn-primary" (click)="updateCredentials()">Update Credentials</button>
+        <a routerLink="/forget-pass" class="btn btn-secondary btn-orange">Reset Password</a>
+        <button class="btn btn-primary btn-orange" (click)="updateCredentials()">Update Credentials</button>
       </div>
     </div>
   </div>
 </div>
-</nav>
+
+<style>
+  .modal-header-orange {
+    background-color: #ff9800; /* Orange background color */
+    color: white; /* White text color */
+  }
+
+  .btn-orange {
+    background-color: #ff9800; /* Orange background color */
+    border-color: #ff9800; /* Orange border color */
+    color: white; /* White text color */
+  }
+
+  .btn-orange:hover {
+    background-color: #e68900; /* Darker orange on hover */
+    border-color: #e68900; /* Darker orange border on hover */
+  }
+</style>

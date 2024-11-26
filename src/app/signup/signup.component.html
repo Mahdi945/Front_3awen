@@ -108,7 +108,8 @@
       </div>
       <div class="checkbox-group">
         <label>
-          <input type="checkbox" name="terms" ngModel required #terms="ngModel" /> I accept the terms of use
+          <input type="checkbox" name="terms" ngModel required #terms="ngModel" />
+          I accept the <a href="" target="_blank">Privacy Policy</a> and <a href="" target="_blank">Terms of Use</a>
           <div *ngIf="terms.invalid && terms.touched" class="error-message">
             You must accept the terms of use.
           </div>
@@ -116,15 +117,10 @@
       </div>
       <button type="submit" class="auth-button" [disabled]="registerForm.invalid">Sign Up</button>
     </form>
-
-    <!-- Google Sign-In Button -->
-    <div class="google-signin-container">
-      <div id="g_id_onload"
-          data-client_id="227936580507-vmrfhtno62vkofudvqsmit1916u1ng4n.apps.googleusercontent.com"
-          data-callback="handleCredentialResponse"
-          data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin" data-type="standard"></div>
+    <br>
+    <div class="auth-footer">
+      Already have an account? <a routerLink="/login">Sign In</a>
     </div>
   </div>
 </div>
+

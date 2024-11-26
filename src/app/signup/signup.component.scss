@@ -1,151 +1,182 @@
-/* Styles globaux ou dans le composant spécifique */
+/* Styles globaux ou spécifiques au composant */
 :host {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-.auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .auth-container {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;
   height: 120vh; /* Prend toute la hauteur de la fenêtre */
   width: 100%; /* Prend toute la largeur de la fenêtre */
-  background-image: url('/assets/img2.jpg');
-  background-size: cover; /* L'image couvre toute la zone */
-  background-position: center center; /* Centre l'image */
-  background-repeat: no-repeat; /* Empêche la répétition de l'image */
-  position: absolute; /* Assure que le fond couvre tout l'espace de la page */
-  top: 0;
-  left: 0;
-  z-index: -1; /* Assure que l'image est en arrière-plan */
-}
+    background-image: url('/assets/img2.jpg'); /* Remplacez avec votre image */
+    background-size: cover; /* L'image couvre toute la zone */
+    background-position: center center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition */
+    position: relative; /* Place l'image derrière le contenu */
+    z-index: 0; /* Évite les conflits avec d'autres éléments */
+    
+    padding-top: 100px; /* Ajoute un espace en haut sous la navbar */
+  }
+  
+  
 
-
-
-.auth-card {
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-  padding: 40px;
-  width: 700px;
-  max-width: 90%;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  margin-top: 170px;
-}
-
-
-.auth-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
-}
-
-.auth-title {
-  margin-bottom: 30px;
-  color: #333;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.input-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
-}
-
-.form-field {
-  flex: 1;
-  margin-right: 15px;
-}
-
-.form-field:last-child {
-  margin-right: 0;
-}
-
-.form-field input,
-.form-field select {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.form-field input:focus,
-.form-field select:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.checkbox-group {
-  text-align: left;
-  margin-bottom: 25px;
-}
-
-.checkbox-group label {
-  font-size: 14px;
-  color: #666;
-}
-
-.checkbox-group input {
-  margin-right: 10px;
-}
-
-.auth-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 14px 30px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.auth-button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-}
-
-.google-signin-container {
-  margin-top: 20px;
-}
-
-.g_id_signin {
-  display: inline-block;
-  margin-top: 10px;
-}
-
-.success-message {
-  color: #155724;
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  text-align: center;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.success-message:hover {
-  background-color: #c3e6cb;
-  border-color: #c3e6cb;
-}
-/* Styles pour le message d'erreur */
-.error-message {
-  color: #d9534f; /* Rouge pour l'erreur */
-  background-color: #f8d7da; /* Fond rouge clair */
-  border: 1px solid #f5c6cb;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  text-align: center;
-}
+  
+  
+  /* Carte de formulaire */
+  .auth-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    width: 700px;
+    max-width: 90%;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: 20px;
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
+    }
+  }
+  
+  /* Titre */
+  .auth-title {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  /* Groupes d'entrée */
+  .input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  
+    .form-field {
+      flex: 1;
+      margin-right: 15px;
+  
+      &:last-child {
+        margin-right: 0;
+      }
+  
+      input,
+      select {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+      }
+    }
+  }
+  
+  /* Checkbox */
+  .checkbox-group {
+    text-align: left;
+    margin-bottom: 25px;
+  
+    label {
+      font-size: 14px;
+      color: #666;
+  
+      input {
+        margin-right: 10px;
+      }
+    }
+  }
+  
+  /* Bouton d'action */
+  .auth-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+  
+    &:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+  
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+  
+  /* Google Sign-In */
+  .google-signin-container {
+    margin-top: 20px;
+  
+    .g_id_signin {
+      display: inline-block;
+      margin-top: 10px;
+    }
+  }
+  
+  /* Messages de succès */
+  .success-message {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+    &:hover {
+      background-color: #c3e6cb;
+      border-color: #c3e6cb;
+    }
+  }
+  
+  /* Messages d'erreur */
+  .error-message {
+    color: #d9534f;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Amélioration : Assurer que les champs sont interactifs */
+  input,
+  select,
+  textarea,
+  button {
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+  }
+  
+  /* Ajustements pour les champs désactivés */
+  input:disabled,
+  select:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+  

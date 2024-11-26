@@ -16,6 +16,9 @@ import { NewPassComponent } from './new-pass/new-pass.component';
 import { AuthGuard } from './auth.guard'; // Import the AuthGuard
 import { IndexComponent } from './index/index.component'; // Import the AppIndexComponent
 import { DonationSuccessComponent } from './donation-success/donation-success.component'; // Ajoutez ce composant
+import { UsermanagementComponent} from './usermanagement/usermanagement.component';
+import { EventrequestComponent } from './eventrequest/eventrequest.component'; // Import the EventRequestComponent
+import { EventmanagementComponent } from './eventmanagement/eventmanagement.component'; // Import the EventManagementComponent
 
 const routes: Routes = [
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }, // Default route
@@ -34,6 +37,10 @@ const routes: Routes = [
   { path: 'new-pass', component: NewPassComponent },
   { path: 'app-index', component: IndexComponent }, // New route for AppIndexComponent
   { path: 'donation-success', component: DonationSuccessComponent }, // Ajout de la route donation-success
+  { path: 'user-management', component: UsermanagementComponent, canActivate: [AuthGuard] },
+  { path: 'event-request', component: EventrequestComponent, canActivate: [AuthGuard] },
+  { path: 'event-management', component: EventmanagementComponent, canActivate: [AuthGuard] }
+
 ];
 
 @NgModule({

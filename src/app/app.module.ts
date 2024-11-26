@@ -32,6 +32,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerService } from './spinner.service';
 import { SpinnerInterceptor } from './spinner.interceptor';
 import { DonationSuccessComponent } from './donation-success/donation-success.component';
+import { UsermanagementComponent } from './usermanagement/usermanagement.component';
+import { EventrequestComponent } from './eventrequest/eventrequest.component';
+import { EventmanagementComponent } from './eventmanagement/eventmanagement.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,10 @@ import { DonationSuccessComponent } from './donation-success/donation-success.co
     NewPassComponent,
     IndexComponent,
     SpinnerComponent,
-    DonationSuccessComponent
+    DonationSuccessComponent,
+    UsermanagementComponent,
+    EventrequestComponent,
+    EventmanagementComponent
   ],
   imports: [
     BrowserModule,

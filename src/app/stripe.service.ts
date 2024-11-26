@@ -28,29 +28,15 @@ export class StripeService {
 
     return response.json();
   }
-
-  async handlePayment(amount: number): Promise<void> {
-    const stripe = await this.stripePromise;
-    if (!stripe) {
-      throw new Error('Stripe.js has not loaded yet.');
-    }
-
-    const { clientSecret } = await this.createPaymentIntent(amount);
-
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: {
-          // Add card details here
-        }
+  async getPayments(): Promise<any> {
+    const response = await fetch('/get-payments', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
       }
     });
-
-    if (result.error) {
-      console.error(result.error.message);
-    } else {
-      if (result.paymentIntent.status === 'succeeded') {
-        console.log('Payment succeeded!');
-      }
-    }
+    return response.json();
   }
+  
+
 }
