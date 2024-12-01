@@ -1,20 +1,96 @@
 .success-container {
-    text-align: center;
-    margin: 50px auto;
-    padding: 20px;
-    background: #f0fff4;
-    border: 2px solid #38a169;
-    border-radius: 10px;
-    color: #2f855a;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  p {
-    margin-top: 10px;
-    font-size: 1.2rem;
-  }
-  
+  text-align: center;
+  margin: 50px auto;
+  padding: 20px;
+  background: #f0fff4;
+  border: 2px solid #38a169;
+  border-radius: 10px;
+  color: #2f855a;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+/* Rating Form Styles */
+.rating-form {
+  margin-top: 20px;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.stars i {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.stars i.checked {
+  color: #ffcc00;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2f855a;
+}
+.thanks-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 40px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.thanks-popup p {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.thanks-popup button {
+  margin-top: 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.thanks-popup button:hover {
+  background-color: #218838;
+}

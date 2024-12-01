@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Importer HttpClient
 
 @Component({
@@ -11,11 +11,15 @@ export class DonationSuccessComponent implements OnInit {
   sessionId: string | null = null;
   eventId: string | null = null;
   donationAmount: number = 0; // Montant de la donation
-  successMessage: string = 'Paiement réussi ! Merci pour votre générosité.';
+  successMessage: string = 'Payment successful! Thank you for your generosity.';
+  rating: number = 0;
+  comment: string = '';
+  showThanksPopup: boolean = false; // Variable pour afficher le popup
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient // Injecter HttpClient
+    private http: HttpClient, // Injecter HttpClient
+    private router: Router // Injecter Router
   ) {}
 
   ngOnInit(): void {
@@ -42,11 +46,6 @@ export class DonationSuccessComponent implements OnInit {
         this.updateEventRaisedAmount();
       }
     });
-
-    // Redirection automatique vers la page d'accueil après 5 secondes
-    setTimeout(() => {
-      window.location.href = '/accueil'; 
-    }, 5000); // 5000 millisecondes = 5 secondes
   }
 
   // Fonction pour appeler l'API et mettre à jour l'événement
@@ -63,5 +62,37 @@ export class DonationSuccessComponent implements OnInit {
           console.error('Erreur lors de la mise à jour:', error);
         }
       );
+  }
+
+  // Fonction pour définir la note
+  setRating(rating: number): void {
+    this.rating = rating;
+  }
+
+  // Fonction pour soumettre la note
+  submitRating(): void {
+    const apiUrl = 'http://localhost:3000/api/ratings/add'; // URL de l'API pour ajouter une note
+
+    // Appel de l'API pour ajouter la note
+    this.http.post(apiUrl, { rating: this.rating, comment: this.comment, type: 'eventRating', eventId: this.eventId })
+      .subscribe(
+        (response) => {
+          console.log('Réponse de l\'ajout de la note:', response);
+          this.showThanksPopup = true; // Afficher le popup de remerciement
+
+          // Rediriger vers l'accueil après 1 minute
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 8000); // 60000 ms = 1 minute
+        },
+        (error) => {
+          console.error('Erreur lors de l\'ajout de la note:', error);
+        }
+      );
+  }
+
+  // Fonction pour fermer le popup de remerciement
+  closeThanksPopup(): void {
+    this.showThanksPopup = false;
   }
 }

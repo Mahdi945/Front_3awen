@@ -36,7 +36,8 @@ export class AppComponent {
     if (this.rating) {
       const ratingData = {
         rating: this.rating,
-        comment: this.feedback
+        comment: this.feedback,
+        type: 'siteRating' // Définir le type de notation comme siteRating
       };
 
       // Envoyer les données au backend

@@ -1,8 +1,26 @@
 <div class="success-container">
-    <h1>{{ successMessage }}</h1>
-    <p>
-      فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ
-    </p>
-    <p>Vous serez redirigé automatiquement vers la page d'accueil dans quelques secondes...</p>
+  <h1>{{ successMessage }}</h1>
+  <p>
+    فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ
+  </p>
+ 
+  <!-- Rating Form -->
+  <div class="rating-form">
+    <h2>Rate this Event</h2>
+    <div class="stars">
+      <i class="fa fa-star" [class.checked]="rating >= 1" (click)="setRating(1)"></i>
+      <i class="fa fa-star" [class.checked]="rating >= 2" (click)="setRating(2)"></i>
+      <i class="fa fa-star" [class.checked]="rating >= 3" (click)="setRating(3)"></i>
+      <i class="fa fa-star" [class.checked]="rating >= 4" (click)="setRating(4)"></i>
+      <i class="fa fa-star" [class.checked]="rating >= 5" (click)="setRating(5)"></i>
+    </div>
+    <textarea [(ngModel)]="comment" placeholder="Leave a comment..."></textarea>
+    <button (click)="submitRating()">Submit Rating</button>
   </div>
-  
+
+  <!-- Thanks Popup -->
+  <div *ngIf="showThanksPopup" class="thanks-popup">
+    <p>Thanks for your rating!</p>
+    <button (click)="closeThanksPopup()">Close</button>
+  </div>
+</div>
