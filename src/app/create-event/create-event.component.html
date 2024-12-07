@@ -40,7 +40,7 @@
   <form class="event-form" (ngSubmit)="onSubmit()" #eventForm="ngForm">
     <div class="form-group">
       <label for="event-image" class="event-image-label">
-        <i class="fa fa-image"></i> Event Photo
+        <i class="fa fa-image"></i> Event Photo <span style="color: red;">*</span>
       </label>
       <div class="image-upload-container">
         <input type="file" id="event-image" (change)="onImageSelected($event)" class="event-image-input" accept="image/*" required/>
@@ -54,14 +54,14 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="event-type">Event Type:</label>
+      <label for="event-type">Event Type: <span style="color: red;">*</span></label>
       <select id="event-type" [(ngModel)]="eventType" name="eventType" required>
         <option value="service">Service Event</option>
         <option value="fundraising">Fundraising Event</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="organizer-name">Organizer's Full Name:</label>
+      <label for="organizer-name">Organizer's Full Name: <span style="color: red;">*</span></label>
       <input type="text" id="organizer-name" [(ngModel)]="evenement.nomOrganisateur" name="nomOrganisateur" required minlength="3" #nomOrganisateur="ngModel" />
       <div *ngIf="nomOrganisateur.invalid && (nomOrganisateur.dirty || nomOrganisateur.touched)" class="error">
         <div *ngIf="nomOrganisateur.errors?.['required']">Full name is required.</div>
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="organizer-email">Organizer's Email Address:</label>
+      <label for="organizer-email">Organizer's Email Address: <span style="color: red;">*</span></label>
       <input type="email" id="organizer-email" [(ngModel)]="evenement.emailOrganisateur" name="emailOrganisateur" required email #emailOrganisateur="ngModel" />
       <div *ngIf="emailOrganisateur.invalid && (emailOrganisateur.dirty || emailOrganisateur.touched)" class="error">
         <div *ngIf="emailOrganisateur.errors?.['required']">Email address is required.</div>
@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="event-title">Event Title:</label>
+      <label for="event-title">Event Title: <span style="color: red;">*</span></label>
       <input type="text" id="event-title" [(ngModel)]="evenement.titre" name="titre" required (blur)="capitalizeTitle()" #titre="ngModel" />
       <div *ngIf="titre.invalid && (titre.dirty || titre.touched)" class="error">
         <div *ngIf="titre.errors?.['required']">Event title is required.</div>
@@ -85,7 +85,7 @@
     </div>
     <div *ngIf="eventType === 'fundraising'">
       <div class="form-group">
-        <label for="donate-for">Donate For:</label>
+        <label for="donate-for">Donate For: <span style="color: red;">*</span></label>
         <input type="text" id="donate-for" [(ngModel)]="evenement.donateFor" name="donateFor" required minlength="3" #donateFor="ngModel" />
         <div *ngIf="donateFor.invalid && (donateFor.dirty || donateFor.touched)" class="error">
           <div *ngIf="donateFor.errors?.['required']">Donate For is required.</div>
@@ -95,21 +95,21 @@
     </div>
     <div *ngIf="eventType === 'service'">
       <div class="form-group">
-        <label for="event-date">Event Date:</label>
+        <label for="event-date">Event Date: <span style="color: red;">*</span></label>
         <input type="date" id="event-date" [(ngModel)]="evenement.date" name="date" required #date="ngModel" />
         <div *ngIf="date.invalid && (date.dirty || date.touched)" class="error">
           <div *ngIf="date.errors?.['required']">Event date is required.</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="event-time">Event Time:</label>
+        <label for="event-time">Event Time: <span style="color: red;">*</span></label>
         <input type="time" id="event-time" [(ngModel)]="evenement.heure" name="heure" required #heure="ngModel" />
         <div *ngIf="heure.invalid && (heure.dirty || heure.touched)" class="error">
           <div *ngIf="heure.errors?.['required']">Event time is required.</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="event-location">Event Location:</label>
+        <label for="event-location">Event Location: <span style="color: red;">*</span></label>
         <div class="input-group">
           <input
             type="text"
@@ -135,7 +135,7 @@
       </div>
       
       <div class="form-group">
-        <label for="event-volunteers">Number of Volunteers Required:</label>
+        <label for="event-volunteers">Number of Volunteers Required: <span style="color: red;">*</span></label>
         <input type="number" id="event-volunteers" [(ngModel)]="evenement.volontaires" name="volontaires" min="1" required #volontaires="ngModel" />
         <div *ngIf="volontaires.invalid && (volontaires.dirty || volontaires.touched)" class="error">
           <div *ngIf="volontaires.errors?.['required']">Number of volunteers is required.</div>
@@ -145,7 +145,7 @@
     </div>
     <div *ngIf="eventType === 'fundraising'">
       <div class="form-group">
-        <label for="fundraising-goal">Fundraising Goal:($)</label>
+        <label for="fundraising-goal">Fundraising Goal:($) <span style="color: red;">*</span></label>
         <div class="input-group">
          
           <input type="number" id="fundraising-goal" [(ngModel)]="evenement.goal" name="goal" required #goal="ngModel" class="form-control" />
@@ -155,7 +155,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="fundraising-deadline">Fundraising Deadline:</label>
+        <label for="fundraising-deadline">Fundraising Deadline: <span style="color: red;">*</span></label>
         <input type="date" id="fundraising-deadline" [(ngModel)]="evenement.deadline" name="deadline" required #deadline="ngModel" />
         <div *ngIf="deadline.invalid && (deadline.dirty || deadline.touched)" class="error">
           <div *ngIf="deadline.errors?.['required']">Fundraising deadline is required.</div>
@@ -163,14 +163,14 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="event-description">Event Description:</label>
+      <label for="event-description">Event Description: <span style="color: red;">*</span></label>
       <textarea id="event-description" [(ngModel)]="evenement.description" name="description" rows="4" required #description="ngModel"></textarea>
       <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
         Event description is required.
       </div>
     </div>
     <div class="form-group">
-      <label for="event-proof">Proofs to provide credibility (ID Card Photo required) : </label>
+      <label for="event-proof">Proofs to provide credibility (ID Card Photo required) : <span style="color: red;">*</span> </label>
       <div class="file-selection-container">
         <input type="file" id="event-proof" (change)="onFileSelected($event)" multiple />
         <button type="button" class="clear-button" (click)="clearFileSelection()">&times;</button>
@@ -180,6 +180,7 @@
       </ul>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+   
   </form>
   <div 
   *ngIf="showSuccessMessage" 

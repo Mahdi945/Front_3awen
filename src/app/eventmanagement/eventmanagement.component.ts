@@ -18,7 +18,7 @@ interface Event {
   preuves: string[];
   isApproved: boolean;
   eventImage: string;
-  raisedAmount?: number; // Added raisedAmount attribute
+  raisedAmount?: number; 
 }
 
 @Component({
