@@ -51,7 +51,7 @@ export class UsermanagementComponent implements OnInit {
   }
 
   deleteUser(userId: string) {
-    this.http.delete(`http://localhost:3000/api/users/${userId}`).subscribe({
+    this.http.delete(`http://localhost:3000/api/users/delete/${userId}`).subscribe({
       next: () => {
         this.loadUsers();
       },

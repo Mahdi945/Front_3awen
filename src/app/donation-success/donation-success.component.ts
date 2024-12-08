@@ -83,7 +83,7 @@ export class DonationSuccessComponent implements OnInit {
           // Rediriger vers l'accueil après 1 minute
           setTimeout(() => {
             this.router.navigate(['/']);
-          }, 8000); // 60000 ms = 1 minute
+          }, 3000); // 60000 ms = 1 minute
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de la note:', error);
